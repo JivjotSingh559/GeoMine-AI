@@ -1,0 +1,587 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard — Platform Overview{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION A: HERO SECTION
+     ═══════════════════════════════════════════════════════════ -->
+<section class="dash-hero">
+  <div class="dash-hero-grid">
+    <div class="dash-hero-left" data-reveal="left">
+      <div class="dash-hero-badge">
+        <span class="dash-hero-badge-pulse"></span>
+        <span>Geoscience Intelligence Platform</span>
+      </div>
+      <h1 class="dash-hero-title">
+        Deciphering the <em>Subsurface</em> with Precision Intelligence.
+      </h1>
+      <p class="dash-hero-desc">
+        GeoMineAI is an AI-powered mineral exploration intelligence portal that unifies fragmented geological records, source-verified assay datasets, and geospatial exploration blocks into a cohesive, analytical platform for India's mineral frontier.
+      </p>
+      <div class="dash-hero-actions">
+        <a href="{{ url_for('explore') }}" class="btn btn-primary btn-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <span>Explore Sites</span>
+        </a>
+        <a href="#how-it-works" class="btn btn-secondary btn-lg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          <span>Discover How It Works</span>
+        </a>
+      </div>
+
+      <div class="dash-hero-metrics">
+        <div class="dash-hero-metric">
+          <span class="dash-hero-metric-num">Verified</span>
+          <span class="dash-hero-metric-label">Source-Backed Records</span>
+        </div>
+        <div class="dash-hero-metric">
+          <span class="dash-hero-metric-num">Geospatial</span>
+          <span class="dash-hero-metric-label">Site Group Coordinates</span>
+        </div>
+        <div class="dash-hero-metric">
+          <span class="dash-hero-metric-num">Standardized</span>
+          <span class="dash-hero-metric-label">Multi-Analyte Grades</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Interactive Geological Strata Visual -->
+    <div class="dash-hero-right" data-reveal="right">
+      <div class="strata-container">
+        <div class="strata-header">
+          <span class="strata-header-title">SUBSURFACE WEATHERING PROFILE</span>
+          <span class="strata-badge">Interactive Geological Model</span>
+        </div>
+
+        <div class="strata-layers">
+          <!-- Layer 1 -->
+          <div class="strata-layer strata-l1 active" data-strata="l1">
+            <div class="strata-layer-content">
+              <div>
+                <div class="strata-layer-title">
+                  <span>Lateritic Duricrust & Pebble Horizon</span>
+                </div>
+                <div class="strata-layer-sub">Ferruginous laterite capping, hydrated iron oxides</div>
+              </div>
+              <span class="strata-layer-depth">0.0m – 3.5m</span>
+            </div>
+          </div>
+
+          <!-- Layer 2 -->
+          <div class="strata-layer strata-l2" data-strata="l2">
+            <div class="strata-layer-content">
+              <div>
+                <div class="strata-layer-title">
+                  <span>Bauxitic Core & Aluminous Zone</span>
+                </div>
+                <div class="strata-layer-sub">Gibbsite-boehmite enrichment, depleted SiO2</div>
+              </div>
+              <span class="strata-layer-depth">3.5m – 12.0m</span>
+            </div>
+          </div>
+
+          <!-- Layer 3 -->
+          <div class="strata-layer strata-l3" data-strata="l3">
+            <div class="strata-layer-content">
+              <div>
+                <div class="strata-layer-title">
+                  <span>Lithomargic Clay & Saprolite</span>
+                </div>
+                <div class="strata-layer-sub">Kaolinitic zone, semi-decomposed host rock</div>
+              </div>
+              <span class="strata-layer-depth">12.0m – 22.0m</span>
+            </div>
+          </div>
+
+          <!-- Layer 4 -->
+          <div class="strata-layer strata-l4" data-strata="l4">
+            <div class="strata-layer-content">
+              <div>
+                <div class="strata-layer-title">
+                  <span>Precambrian Crystalline Bedrock</span>
+                </div>
+                <div class="strata-layer-sub">Granulite, peninsular gneiss, or metasediment</div>
+              </div>
+              <span class="strata-layer-depth">> 22.0m</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="strata-callout">
+          <svg class="strata-callout-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+          </svg>
+          <span id="strataCalloutText">
+            <strong>Click any horizon</strong> above to inspect stratigraphic characteristics and petrological weathering indicators.
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION B: THE PROBLEM
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="problem">
+  <div class="eyebrow" data-reveal>THE CHALLENGE IN MINERAL DATA</div>
+  <h2 class="mb-4" data-reveal>Why Mineral Exploration Data is Difficult to Work With</h2>
+  <p class="text-secondary mb-6" style="max-width: 680px;" data-reveal>
+    Mineral exploration across India has generated decades of valuable technical documentation, yet researchers, geologists, and students encounter severe workflow hurdles when trying to extract actionable insights.
+  </p>
+
+  <div class="grid-3">
+    <!-- Problem 1 -->
+    <div class="problem-card" data-reveal="scale" data-reveal-delay="1">
+      <div class="problem-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          <line x1="7" y1="10" x2="7" y2="14"/><line x1="14" y1="7" x2="10" y2="7"/>
+        </svg>
+      </div>
+      <h3>Scattered & Siloed Records</h3>
+      <p>
+        Crucial geological exploration data remains buried across disparate PDF reports, physical bulletins, and isolated institutional archives, requiring hours of manual collation.
+      </p>
+    </div>
+
+    <!-- Problem 2 -->
+    <div class="problem-card" data-reveal="scale" data-reveal-delay="2">
+      <div class="problem-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+      </div>
+      <h3>Multi-Analyte Ambiguity</h3>
+      <p>
+        In raw tables, one physical rock or core sample frequently spawns multiple rows (Al2O3, SiO2, Fe2O3, TiO2). Naive statistical parsing incorrectly conflates analyte counts with physical sample counts.
+      </p>
+    </div>
+
+    <!-- Problem 3 -->
+    <div class="problem-card" data-reveal="scale" data-reveal-delay="3">
+      <div class="problem-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+      </div>
+      <h3>Inconsistent Coordinates</h3>
+      <p>
+        Exploration blocks often document a single regional or lease reference coordinate rather than surveyed collar positions for every borehole, leading to inaccurate spatial representations.
+      </p>
+    </div>
+
+    <!-- Problem 4 -->
+    <div class="problem-card" data-reveal="scale" data-reveal-delay="4">
+      <div class="problem-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <h3>Complex Grade Interpretations</h3>
+      <p>
+        Comparing mineralized intervals across distinct geological formations requires careful unit harmonization (percent vs. ppm) and transparent separation of commercial ore thresholds.
+      </p>
+    </div>
+
+    <!-- Problem 5 -->
+    <div class="problem-card" data-reveal="scale" data-reveal-delay="5">
+      <div class="problem-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </div>
+      <h3>Laborious Reporting Workflows</h3>
+      <p>
+        Drafting exploration summaries, site comparisons, and audit dossiers manually requires repetitive data extraction and chart formatting without unified audit trails.
+      </p>
+    </div>
+
+    <!-- Problem 6 -->
+    <div class="problem-card" data-reveal="scale" data-reveal-delay="6">
+      <div class="problem-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <h3>Lack of Standardized Tooling</h3>
+      <p>
+        Mining teams and academic departments often oscillate between unwieldy spreadsheets and high-cost proprietary GIS software lacking customized mineral exploration logic.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION C: OUR SOLUTION
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);" id="solution">
+  <div class="eyebrow" data-reveal>THE GEOMINEAI PLATFORM</div>
+  <h2 class="mb-4" data-reveal>A Unified Architecture for Exploration Intelligence</h2>
+  <p class="text-secondary mb-6" style="max-width: 680px;" data-reveal>
+    GeoMineAI transforms raw, heterogeneous exploration datasets into an interactive, scientific workbench designed for transparent analysis, site comparison, and structured reporting.
+  </p>
+
+  <div class="solution-grid">
+    <div class="solution-card" data-reveal="scale">
+      <div class="solution-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+        </svg>
+      </div>
+      <h3>Centralized Exploration Data</h3>
+      <p>Cleaned, audited, and harmonized repository of 32,562 exploration records spanning 18 major sites and 10 mineral categories across 7 Indian states.</p>
+    </div>
+
+    <div class="solution-card" data-reveal="scale" data-reveal-delay="1">
+      <div class="solution-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>
+        </svg>
+      </div>
+      <h3>Synchronized Geospatial Discovery</h3>
+      <p>Simultaneous synchronization between responsive geological site cards and interactive Leaflet map markers with zero invented coordinates.</p>
+    </div>
+
+    <div class="solution-card" data-reveal="scale" data-reveal-delay="2">
+      <div class="solution-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/>
+        </svg>
+      </div>
+      <h3>Source-Traceable Quality Audits</h3>
+      <p>Full transcription provenance displayed for every site, citing source exploration reports, sample categories, and data audit status.</p>
+    </div>
+
+    <div class="solution-card" data-reveal="scale" data-reveal-delay="3">
+      <div class="solution-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <h3>Cross-Sectional Comparative Analytics</h3>
+      <p>Interactive distributions, analyte grade comparisons, and multi-site variance tables without misleading claims of causal correlation.</p>
+    </div>
+
+    <div class="solution-card" data-reveal="scale" data-reveal-delay="4">
+      <div class="solution-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+      </div>
+      <h3>User-Configurable Reports</h3>
+      <p>Generate tailored executive dossiers, multi-site comparisons, or assay summaries with instant client-side preview and CSV/PDF export.</p>
+    </div>
+
+    <div class="solution-card" data-reveal="scale" data-reveal-delay="5">
+      <div class="solution-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+        </svg>
+      </div>
+      <h3>External Geoscience Enrichment</h3>
+      <p>Authoritative regional stratigraphy and craton context synthesized with references to GSI, NGDR, IBM, and Macrostrat databases.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION D: HOW IT WORKS
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="how-it-works">
+  <div class="eyebrow" data-reveal>STEP-BY-STEP WORKFLOW</div>
+  <h2 class="mb-4" data-reveal>How GeoMineAI Powers Exploration Intelligence</h2>
+  <p class="text-secondary mb-6" style="max-width: 680px;" data-reveal>
+    Follow an intuitive, scientific 4-step exploration journey from high-level mineral discovery to detailed analytical reporting.
+  </p>
+
+  <div class="hiw-stepper" data-reveal>
+    <!-- Left: Step Navigation Buttons -->
+    <div class="hiw-steps-nav">
+      <button class="hiw-step-btn active" data-step="0">
+        <span class="hiw-step-num">01</span>
+        <div>
+          <div class="hiw-step-title">Discover Sites</div>
+          <div class="hiw-step-desc">Filter by mineral category, state, and coordinates</div>
+        </div>
+      </button>
+
+      <button class="hiw-step-btn" data-step="1">
+        <span class="hiw-step-num">02</span>
+        <div>
+          <div class="hiw-step-title">Inspect Records</div>
+          <div class="hiw-step-desc">Examine verified assay tables and source audits</div>
+        </div>
+      </button>
+
+      <button class="hiw-step-btn" data-step="2">
+        <span class="hiw-step-num">03</span>
+        <div>
+          <div class="hiw-step-title">Compare Analytics</div>
+          <div class="hiw-step-desc">Evaluate grade distributions across geological blocks</div>
+        </div>
+      </button>
+
+      <button class="hiw-step-btn" data-step="3">
+        <span class="hiw-step-num">04</span>
+        <div>
+          <div class="hiw-step-title">Generate Reports</div>
+          <div class="hiw-step-desc">Configure and export custom exploration dossiers</div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Right: Dynamic Stage Preview -->
+    <div class="hiw-stage-preview" id="hiwStagePreview">
+      <!-- Injected dynamically by dashboard.js -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION E: PLATFORM FEATURES
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border);" id="features">
+  <div class="eyebrow" data-reveal>CAPABILITIES</div>
+  <h2 class="mb-4" data-reveal>Core Features of GeoMineAI</h2>
+  <p class="text-secondary mb-6" style="max-width: 680px;" data-reveal>
+    Explore the dedicated modules engineered specifically for mining geologists, academic researchers, and exploration planners.
+  </p>
+
+  <div class="features-grid">
+    <!-- Feature 1 -->
+    <div class="feature-tile" data-reveal="scale">
+      <div class="feature-tile-icon">🗺️</div>
+      <h3>Explore Sites & Geological Cards</h3>
+      <p>
+        Browse responsive site cards styled with mineral-specific aesthetics. Inspect site identifiers, administrative locations, median coordinates, and assay data availability.
+      </p>
+      <a href="{{ url_for('explore') }}" class="feature-link">
+        <span>Open Explore Sites</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Feature 2 -->
+    <div class="feature-tile" data-reveal="scale" data-reveal-delay="1">
+      <div class="feature-tile-icon">📍</div>
+      <h3>Interactive Geospatial Mapping</h3>
+      <p>
+        Leaflet-powered India exploration basemap featuring mineral-themed pins, interactive popups, split-view list synchronization, and coordinate bounds auto-fitting.
+      </p>
+      <a href="{{ url_for('explore') }}" class="feature-link">
+        <span>View Exploration Map</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Feature 3 -->
+    <div class="feature-tile" data-reveal="scale" data-reveal-delay="2">
+      <div class="feature-tile-icon">📊</div>
+      <h3>Comparative Analytics Workspace</h3>
+      <p>
+        Data-driven charts comparing analyte grades across sites, frequency histograms for major oxides, and cross-sectional variance analysis using actual records.
+      </p>
+      <a href="{{ url_for('analytics') }}" class="feature-link">
+        <span>Launch Analytics</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Feature 4 -->
+    <div class="feature-tile" data-reveal="scale" data-reveal-delay="3">
+      <div class="feature-tile-icon">📑</div>
+      <h3>Custom Technical Reporting</h3>
+      <p>
+        User-driven report builder supporting multi-site comparisons, mineral profiles, and assay summaries with interactive live preview and direct CSV/PDF export.
+      </p>
+      <a href="{{ url_for('reports') }}" class="feature-link">
+        <span>Build Report</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Feature 5 -->
+    <div class="feature-tile" data-reveal="scale" data-reveal-delay="4">
+      <div class="feature-tile-icon">🔬</div>
+      <h3>Assay Grade Summaries</h3>
+      <p>
+        Detailed breakdown of analyte concentrations (mean, median, min, max, std deviation) with correct units (%, ppm, mg/kg) derived strictly from recorded data.
+      </p>
+      <a href="{{ url_for('explore') }}" class="feature-link">
+        <span>Examine Assays</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Feature 6 -->
+    <div class="feature-tile" data-reveal="scale" data-reveal-delay="5">
+      <div class="feature-tile-icon">🛡️</div>
+      <h3>Source Audit & Data Hygiene</h3>
+      <p>
+        Clear labeling of coordinate types, transcription origins, and data limitations to prevent misinterpreting single site coordinates as individual drill collars.
+      </p>
+      <a href="{{ url_for('reports') }}" class="feature-link">
+        <span>Inspect Quality Controls</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION F: USER FRIENDLINESS
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="user-friendliness">
+  <div class="friendly-banner" data-reveal>
+    <div>
+      <div class="eyebrow mb-2">DESIGNED FOR CLARITY</div>
+      <h2 class="mb-4">Engineered for Frictionless Exploration</h2>
+      <p class="text-secondary mb-6">
+        GeoMineAI replaces cumbersome GIS workflows and raw CSV spreadsheets with a clean, responsive interface designed to respect geological nuance while remaining accessible to every user.
+      </p>
+      <a href="{{ url_for('explore') }}" class="btn btn-primary">
+        <span>Try Interactive Search</span>
+      </a>
+    </div>
+
+    <div class="friendly-checklist">
+      <div class="friendly-check-item">
+        <div class="friendly-check-icon">✓</div>
+        <div>
+          <div class="friendly-check-title">Zero Guesswork Navigation</div>
+          <div class="friendly-check-desc">Seamless side-panel navigation across all 4 dedicated modules with persistent active page indicators.</div>
+        </div>
+      </div>
+
+      <div class="friendly-check-item">
+        <div class="friendly-check-icon">✓</div>
+        <div>
+          <div class="friendly-check-title">Multi-Dimensional Instant Filtering</div>
+          <div class="friendly-check-desc">Filter sites by mineral type, administrative state, district, or assay presence simultaneously with live result counters.</div>
+        </div>
+      </div>
+
+      <div class="friendly-check-item">
+        <div class="friendly-check-icon">✓</div>
+        <div>
+          <div class="friendly-check-title">Transparent Handling of Missing Fields</div>
+          <div class="friendly-check-desc">Missing coordinates or unrecorded analytes are transparently labeled rather than fabricated or filled with synthetic mock values.</div>
+        </div>
+      </div>
+
+      <div class="friendly-check-item">
+        <div class="friendly-check-icon">✓</div>
+        <div>
+          <div class="friendly-check-title">Adaptive Layout for Field and Office</div>
+          <div class="friendly-check-desc">Fully responsive grid layouts supporting ultra-wide desktop monitors, laptops, field tablets, and mobile devices.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION G: WHO CAN USE IT?
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" style="background: var(--bg-secondary); border-top: 1px solid var(--border);" id="audience">
+  <div class="eyebrow" data-reveal>TARGET AUDIENCE</div>
+  <h2 class="mb-4" data-reveal>Who Can Benefit from GeoMineAI?</h2>
+  <p class="text-secondary mb-6" style="max-width: 680px;" data-reveal>
+    From university classrooms to active exploration ventures, GeoMineAI serves diverse stakeholders across the mineral resource lifecycle.
+  </p>
+
+  <div class="audience-grid">
+    <div class="audience-card" data-reveal="scale">
+      <div class="audience-avatar">🎓</div>
+      <h3>Geology Students</h3>
+      <p>Study real-world mineral deposit occurrences across India, examine geochemical oxide distributions, and learn exploration report structuring.</p>
+    </div>
+
+    <div class="audience-card" data-reveal="scale" data-reveal-delay="1">
+      <div class="audience-avatar">🔬</div>
+      <h3>Geological Researchers</h3>
+      <p>Analyze regional geochemical variance, study lateral weathering profiles in bauxites, and cross-reference exploration borehole data.</p>
+    </div>
+
+    <div class="audience-card" data-reveal="scale" data-reveal-delay="2">
+      <div class="audience-avatar">⛏️</div>
+      <h3>Exploration Professionals</h3>
+      <p>Perform preliminary reconnaissance on known mineral blocks, evaluate recorded assay ranges, and benchmark prospective concession areas.</p>
+    </div>
+
+    <div class="audience-card" data-reveal="scale" data-reveal-delay="3">
+      <div class="audience-avatar">📊</div>
+      <h3>Data Analysts & Consultancies</h3>
+      <p>Export harmonized exploration records for custom statistical modeling, GIS layer overlay, and client resource advisory briefings.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION H: EXTERNAL DATA INTEGRATIONS
+     ═══════════════════════════════════════════════════════════ -->
+<section class="section" id="external-sources">
+  <div class="eyebrow" data-reveal>EXTERNAL REPOSITORIES & DATA INTEGRATIONS</div>
+  <h2 class="mb-4" data-reveal>Official Geoscience Data Ecosystem</h2>
+  <p class="text-secondary mb-6" style="max-width: 680px;" data-reveal>
+    GeoMineAI grounds its exploration intelligence by referencing official national and global geoscience authorities. External references enrich regional context without modifying original assay records.
+  </p>
+
+  <div class="external-sources-grid" id="externalSourcesList">
+    <!-- Populated dynamically from /api/external/sources by dashboard.js -->
+    <div class="skeleton" style="height: 140px;"></div>
+    <div class="skeleton" style="height: 140px;"></div>
+    <div class="skeleton" style="height: 140px;"></div>
+    <div class="skeleton" style="height: 140px;"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION I: FINAL CTA
+     ═══════════════════════════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="final-cta-content" data-reveal>
+    <div class="eyebrow mb-2" style="justify-content: center;">START EXPLORING TODAY</div>
+    <h2>Ready to Investigate India's Mineral Landscape?</h2>
+    <p>
+      Discover geological exploration blocks, analyze recorded assay distributions, and generate publication-ready exploration dossiers with GeoMineAI.
+    </p>
+    <div class="final-cta-btns">
+      <a href="{{ url_for('explore') }}" class="btn btn-primary btn-lg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <span>Launch Explore Sites</span>
+      </a>
+      <a href="{{ url_for('analytics') }}" class="btn btn-secondary btn-lg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="2,15 7,8 11,11 16,4 18,6"/>
+          <line x1="2" y1="18" x2="18" y2="18"/>
+        </svg>
+        <span>Open Analytics</span>
+      </a>
+      <a href="{{ url_for('reports') }}" class="btn btn-ghost btn-lg">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="4" y="2" width="12" height="16" rx="2"/>
+        </svg>
+        <span>Custom Reports</span>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

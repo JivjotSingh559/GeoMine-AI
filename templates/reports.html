@@ -1,0 +1,273 @@
+{% extends "base.html" %}
+
+{% block title %}Reports — Custom Exploration Dossier Generator{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- ═══ PAGE HEADER ═══ -->
+<header class="page-head">
+  <div class="eyebrow">HOME / REPORTS</div>
+  <div class="page-head-row">
+    <div>
+      <h1>Custom Exploration Reports</h1>
+      <p>
+        Configure, preview, and generate tailored mineral exploration dossiers, multi-site comparison matrices, and source-verified analytical records.
+      </p>
+    </div>
+    <div>
+      <span class="badge badge-accent" style="font-size: 12px; padding: 6px 14px;">
+        USER-DRIVEN REPORTING WORKSPACE
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ MAIN WORKSPACE (CONFIGURATOR + LIVE PREVIEW) ═══ -->
+<div class="reports-layout">
+  <!-- Left Column: Report Configurator -->
+  <aside class="report-config-panel">
+    <div class="config-section-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+      <span>Report Configuration</span>
+    </div>
+
+    <!-- Title Input -->
+    <div class="config-group">
+      <label class="input-label" for="reportTitleInput">Report Document Title</label>
+      <input
+        type="text"
+        id="reportTitleInput"
+        class="input"
+        value="GeoMineAI Mineral Exploration Intelligence Dossier"
+      >
+    </div>
+
+    <!-- Report Type -->
+    <div class="config-group">
+      <label class="input-label" for="reportTypeSelect">Report Template Type</label>
+      <select id="reportTypeSelect" class="select">
+        <option value="mineral_comp">Mineral Comparison Report</option>
+        <option value="site_summary">Individual Site Report</option>
+        <option value="multi_site">Multi-Site Comparison Report</option>
+        <option value="assay_summary">Assay Analytical Summary</option>
+        <option value="custom_dossier">Custom Exploration Dossier</option>
+      </select>
+    </div>
+
+    <!-- Mineral Focus -->
+    <div class="config-group">
+      <label class="input-label" for="reportMineralSelect">Target Mineral Category</label>
+      <select id="reportMineralSelect" class="select">
+        <option value="Bauxite">Bauxite</option>
+      </select>
+    </div>
+
+    <!-- Exploration Sites Checkboxes -->
+    <div class="config-group">
+      <label class="input-label">Select Target Exploration Blocks</label>
+      <div class="sites-checkbox-list" id="reportSitesList">
+        <div class="skeleton" style="height: 24px;"></div>
+        <div class="skeleton" style="height: 24px;"></div>
+      </div>
+    </div>
+
+    <!-- Sections to Include -->
+    <div class="config-group">
+      <label class="input-label">Report Sections to Include</label>
+      <div class="section-toggles-grid">
+        <label class="section-toggle-card checked">
+          <input type="checkbox" data-section="overview" checked>
+          <span>Executive Overview</span>
+        </label>
+        <label class="section-toggle-card checked">
+          <input type="checkbox" data-section="sites" checked>
+          <span>Site Profiles</span>
+        </label>
+        <label class="section-toggle-card checked">
+          <input type="checkbox" data-section="assays" checked>
+          <span>Assay Statistics</span>
+        </label>
+        <label class="section-toggle-card checked">
+          <input type="checkbox" data-section="comparison" checked>
+          <span>Comparison Matrix</span>
+        </label>
+        <label class="section-toggle-card checked">
+          <input type="checkbox" data-section="sources" checked>
+          <span>Source Provenance</span>
+        </label>
+        <label class="section-toggle-card checked">
+          <input type="checkbox" data-section="disclaimer" checked>
+          <span>Caveats & Limitations</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Methodology Notes -->
+    <div class="config-group">
+      <label class="input-label" for="reportNotesInput">Exploration Methodology Notes</label>
+      <textarea id="reportNotesInput" class="textarea" rows="3">Preliminary technical reconnaissance dossier generated for exploration evaluation and comparative grade assessment.</textarea>
+    </div>
+
+    <!-- Export Action Buttons -->
+    <div class="report-action-btns">
+      <button class="btn btn-secondary w-full" id="refreshPreviewBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+        <span>Refresh Live Preview</span>
+      </button>
+
+      <button class="btn btn-primary w-full" id="exportCsvBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>Export Filtered CSV Dataset</span>
+      </button>
+
+      <button class="btn btn-ghost w-full" id="printPdfBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        <span>Print / Save as PDF</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Right Column: Live Document Preview Sheet -->
+  <main class="report-preview-sheet" id="reportPreviewSheet">
+    <!-- Document Header -->
+    <div class="preview-doc-header">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 4px;">GEOMINEAI TECHNICAL DOSSIER</div>
+        <h2 class="preview-doc-title" id="previewDocTitle">GeoMineAI Mineral Exploration Intelligence Dossier</h2>
+        <div class="preview-doc-meta" id="previewDocMeta">
+          Generated: Loading…<br>
+          Primary Dataset: GeoMineAI_Final_Model_Training_Clean_v1.csv<br>
+          Report Scope: Initializing
+        </div>
+      </div>
+      <div class="preview-doc-badge">
+        <span class="badge badge-accent">TECHNICAL DOCUMENT</span>
+        <span class="text-mono text-muted" style="font-size: 10px;">PROVENANCE AUDITED</span>
+      </div>
+    </div>
+
+    <!-- Section 1: Executive Overview -->
+    <section class="preview-section" id="previewOverviewSection">
+      <div class="preview-section-title">
+        <span>01. Executive Exploration Overview</span>
+      </div>
+      <div class="preview-metrics-row">
+        <div class="preview-metric-box">
+          <div class="preview-metric-val" id="previewTotalRecords">—</div>
+          <div class="preview-metric-lbl">Total Records</div>
+        </div>
+        <div class="preview-metric-box">
+          <div class="preview-metric-val" id="previewTotalSites">—</div>
+          <div class="preview-metric-lbl">Target Sites</div>
+        </div>
+        <div class="preview-metric-box">
+          <div class="preview-metric-val" id="previewTotalMinerals">—</div>
+          <div class="preview-metric-lbl">Mineral Domains</div>
+        </div>
+        <div class="preview-metric-box">
+          <div class="preview-metric-val" id="previewTotalStates">—</div>
+          <div class="preview-metric-lbl">Jurisdictions</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Exploration Site Profiles -->
+    <section class="preview-section" id="previewSitesSection">
+      <div class="preview-section-title">
+        <span>02. Exploration Site Locations & Scope</span>
+      </div>
+      <div class="preview-table-wrap">
+        <table class="preview-table">
+          <thead>
+            <tr>
+              <th>Site Name</th>
+              <th>Site ID</th>
+              <th>State</th>
+              <th>District</th>
+              <th>Records</th>
+              <th>Coordinates</th>
+            </tr>
+          </thead>
+          <tbody id="previewSitesTableBody">
+            <tr><td colspan="6" style="text-align: center; color: var(--text-muted); padding: 16px;">Loading site profiles…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 3: Assay Statistics Table -->
+    <section class="preview-section" id="previewAssaySection">
+      <div class="preview-section-title">
+        <span>03. Analytical Assay Summary Statistics</span>
+      </div>
+      <div class="preview-table-wrap">
+        <table class="preview-table">
+          <thead>
+            <tr>
+              <th>Analyte</th>
+              <th>Unit</th>
+              <th>Records</th>
+              <th>Mean Grade</th>
+              <th>Median</th>
+              <th>Min – Max Range</th>
+              <th>Std. Dev (±)</th>
+            </tr>
+          </thead>
+          <tbody id="previewAssayTableBody">
+            <tr><td colspan="7" style="text-align: center; color: var(--text-muted); padding: 16px;">Loading assay records…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 4: Multi-Site Comparison Matrix -->
+    <section class="preview-section" id="previewComparisonSection" style="display: none;">
+      <div class="preview-section-title">
+        <span>04. Multi-Block Comparative Grade Matrix</span>
+      </div>
+      <div class="preview-table-wrap">
+        <table class="preview-table">
+          <thead id="previewCompTableHead"></thead>
+          <tbody id="previewCompTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 5: Methodology Notes -->
+    <section class="preview-section" id="previewSourcesSection">
+      <div class="preview-section-title">
+        <span>05. User Exploration Notes & Context</span>
+      </div>
+      <div class="preview-notes-box" id="previewNotesText">
+        Preliminary technical reconnaissance dossier generated for exploration evaluation and comparative grade assessment.
+      </div>
+    </section>
+
+    <!-- Section 6: Caveats & Disclaimers -->
+    <section class="preview-section" id="previewDisclaimerSection" style="border-bottom: none;">
+      <div class="preview-section-title">
+        <span>06. Data Integrity & Scientific Disclaimer</span>
+      </div>
+      <div style="font-size: 11px; color: var(--text-muted); line-height: 1.6; background: var(--bg-elevated); padding: 14px; border-radius: var(--radius-sm); border-left: 2px solid var(--warning);">
+        <strong>Regulatory Citation & Limitations:</strong> All figures presented herein are computed directly from the underlying GeoMineAI dataset transcribed from government exploration reports and chemical laboratory tables. An assay row does not necessarily constitute a unique physical sample; multi-analyte rows frequently stem from single core runs. Coordinates represent block median references. These descriptive summaries are provided for preliminary geological screening and academic analysis, not as a substitute for certified JORC/UNFC resource estimation.
+      </div>
+    </section>
+  </main>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/reports.js') }}"></script>
+{% endblock %}
