@@ -1,0 +1,41 @@
+{
+  "mineral": "Limestone",
+  "target_column": "target_limestone",
+  "features": [
+    "latitude",
+    "longitude"
+  ],
+  "n_training_samples": 1069,
+  "positive_sites": [
+    "MUTYALAMPADU-TANGEDA",
+    "RAGHUNATHAPALEM-C3",
+    "RAMAPURAM",
+    "TANGEDA"
+  ],
+  "negative_sites": [
+    "ALENGA-NENDWADI",
+    "ANAJI-KIOCL-27",
+    "DUMARGUDA",
+    "GILANGUDA-PADUR",
+    "GOVINDPUR-W-SN",
+    "KARIMNAGAR-MOLYBDENITE",
+    "MARAMPALLI-JINJGAON",
+    "MURWADA-TUMARIKODI",
+    "OBALAPURA-KIOCL-28",
+    "PARPATIA",
+    "PIMPERKUNTA-MN-G3",
+    "TADGAON-WATELI",
+    "TADGAON-WATELI-G4",
+    "TARHAPANI-WEST"
+  ],
+  "device": "cuda",
+  "parameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "random_state": 42,
+    "eval_metric": "logloss"
+  }
+}

@@ -107,6 +107,58 @@
     <div class="sidebar-disclaimer">
       <strong>Data Note:</strong> Map markers represent the geographic median of records in each exploration block. They reflect reported reconnaissance coordinates, not individual surveyed borehole collars.
     </div>
+
+    <!-- Spatial Affinity Probe Tool (Pathway A) -->
+    <div id="spatialAffinityCard">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+        <div style="font: 700 11px var(--font-mono); color: var(--accent); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/>
+            <line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/>
+          </svg>
+          <span>SPATIAL AFFINITY PROBE</span>
+        </div>
+        <span class="badge badge-accent" style="font-size: 10px; padding: 2px 6px;">Pathway A</span>
+      </div>
+
+      <p style="font-size: 11px; color: var(--text-secondary); margin-bottom: 10px; line-height: 1.4;">
+        Click anywhere on the map or input coordinates to calculate spatial proximity to verified historical exploration blocks.
+      </p>
+
+      <div class="filter-item" style="margin-bottom: 8px;">
+        <label class="input-label" for="affinityMineralSelect">Target Mineral</label>
+        <select id="affinityMineralSelect" class="select" style="font-size: 12px; padding: 6px 10px;">
+          <option value="Iron Ore">Iron Ore (6 blocks, 505 locs)</option>
+          <option value="Limestone">Limestone (4 blocks, 47 locs)</option>
+          <option value="Bauxite">Bauxite (3 blocks, 196 locs)</option>
+          <option value="Manganese">Manganese (1 block — Insufficient)</option>
+        </select>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px;">
+        <div>
+          <label class="input-label" for="affinityLatInput">Latitude</label>
+          <input type="number" step="0.0001" id="affinityLatInput" class="input" placeholder="e.g. 19.52" style="font-size: 11px; padding: 6px 8px;">
+        </div>
+        <div>
+          <label class="input-label" for="affinityLonInput">Longitude</label>
+          <input type="number" step="0.0001" id="affinityLonInput" class="input" placeholder="e.g. 80.41" style="font-size: 11px; padding: 6px 8px;">
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 6px;">
+        <button class="btn btn-primary btn-sm" id="btnRunAffinity" style="flex: 1; justify-content: center; font-size: 12px;">
+          Calculate Affinity
+        </button>
+        <button class="btn btn-ghost btn-sm" id="btnClearAffinity" style="padding: 6px 10px; font-size: 11px;" title="Clear probe pin">
+          Clear
+        </button>
+      </div>
+
+      <!-- Result Container -->
+      <div id="affinityResultContainer" style="display: none;"></div>
+    </div>
   </aside>
 
   <!-- Main Exploration Content -->
@@ -164,7 +216,7 @@
       <div class="explore-map-wrap">
         <div id="exploreMap"></div>
         <div class="explore-map-overlay">
-          <span>Pins denote grouped exploration block medians</span>
+          <span>🎯 Click anywhere on map to probe Spatial Affinity Score</span>
           <span>Click any marker to inspect assay records</span>
         </div>
       </div>

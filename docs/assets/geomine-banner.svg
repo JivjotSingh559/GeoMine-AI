@@ -1,158 +1,146 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="100%" height="380" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="100%" height="420" fill="none">
   <defs>
-    <!-- Background Gradient -->
+    <!-- Background Gradient: Warm Earth/Copper Palette -->
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#05090d"/>
-      <stop offset="50%" stop-color="#0b151e"/>
-      <stop offset="100%" stop-color="#070c11"/>
+      <stop offset="0%" stop-color="#171513"/>
+      <stop offset="50%" stop-color="#211D19"/>
+      <stop offset="100%" stop-color="#141210"/>
     </linearGradient>
 
     <!-- Accent Gradients -->
-    <linearGradient id="cyanTeal" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#42e5d1"/>
-      <stop offset="100%" stop-color="#149485"/>
+    <linearGradient id="copperBright" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF9557"/>
+      <stop offset="100%" stop-color="#E98245"/>
     </linearGradient>
-    <linearGradient id="limeAccent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#b7f36b"/>
-      <stop offset="100%" stop-color="#42e5d1"/>
+    <linearGradient id="mutedCopper" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B96D43"/>
+      <stop offset="100%" stop-color="#733F23"/>
     </linearGradient>
-    <linearGradient id="goldEarth" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff9d57"/>
-      <stop offset="100%" stop-color="#bd5e23"/>
+    <linearGradient id="warmSand" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E8D6C1"/>
+      <stop offset="100%" stop-color="#B9AAA0"/>
     </linearGradient>
 
     <!-- Grid Pattern -->
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#162734" stroke-width="0.7" opacity="0.6"/>
-      <circle cx="40" cy="40" r="1" fill="#243d4f" opacity="0.5"/>
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#332922" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="40" cy="40" r="1.2" fill="#493A30" opacity="0.7"/>
     </pattern>
 
     <!-- Subtle Glow Filter -->
     <filter id="badgeGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
       <feComposite in="SourceGraphic" in2="blur" operator="over"/>
     </filter>
   </defs>
 
   <!-- Background Base -->
-  <rect width="1200" height="380" fill="url(#bgGrad)"/>
-  <rect width="1200" height="380" fill="url(#grid)"/>
+  <rect width="1200" height="420" fill="url(#bgGrad)"/>
+  <rect width="1200" height="420" fill="url(#grid)"/>
 
-  <!-- Topographic Contour Lines (Geological Elevation Simulation) -->
-  <g opacity="0.18" stroke="#42e5d1" stroke-width="1.2" fill="none">
-    <path d="M -50 280 C 180 320, 320 220, 520 250 C 720 280, 850 190, 1050 220 C 1150 235, 1220 200, 1260 210" />
-    <path d="M -50 240 C 150 270, 360 180, 560 210 C 760 240, 890 150, 1080 180 C 1170 195, 1220 170, 1260 175" />
-    <path d="M -50 320 C 200 360, 280 260, 480 290 C 680 320, 820 230, 1020 260 C 1120 275, 1200 240, 1260 250" />
-    <path d="M -50 360 C 220 400, 310 300, 510 330 C 710 360, 860 270, 1060 300 C 1160 315, 1210 280, 1260 290" />
-    <path d="M 680 -40 C 760 80, 920 40, 1050 100 C 1150 145, 1220 120, 1260 130" opacity="0.6"/>
+  <!-- Topographic Contour Lines (Geological Elevation Simulation in Warm Sand / Terracotta) -->
+  <g opacity="0.22" stroke="#E98245" stroke-width="1.2" fill="none">
+    <path d="M -50 300 C 180 340, 320 240, 520 270 C 720 300, 850 210, 1050 240 C 1150 255, 1220 220, 1260 230" />
+    <path d="M -50 260 C 150 290, 360 200, 560 230 C 760 260, 890 170, 1080 200 C 1170 215, 1220 190, 1260 195" />
+    <path d="M -50 340 C 200 380, 280 280, 480 310 C 680 340, 820 250, 1020 280 C 1120 295, 1200 260, 1260 270" stroke="#B96D43"/>
+    <path d="M -50 380 C 220 420, 310 320, 510 350 C 710 380, 860 290, 1060 320 C 1160 335, 1210 300, 1260 310" stroke="#493A30"/>
+    <path d="M 680 -40 C 760 80, 920 40, 1050 100 C 1150 145, 1220 120, 1260 130" stroke="#E8D6C1" opacity="0.3"/>
   </g>
 
   <!-- Subterranean Borehole / Depth Crosshairs (Right Side Graphic) -->
-  <g transform="translate(860, 40)" opacity="0.85">
-    <!-- Stratigraphy column frame -->
-    <rect x="180" y="20" width="80" height="260" rx="3" fill="#0d1922" stroke="#243848" stroke-width="1.5"/>
-    <!-- Stratum layers -->
-    <rect x="182" y="22" width="76" height="42" fill="#1b2a36" opacity="0.9"/>
-    <text x="220" y="47" font-family="'DM Mono', monospace" font-size="8" fill="#8ba4b3" text-anchor="middle">LATERITE</text>
-    
-    <rect x="182" y="66" width="76" height="58" fill="#243949" opacity="0.85"/>
-    <text x="220" y="100" font-family="'DM Mono', monospace" font-size="8" fill="#42e5d1" text-anchor="middle">BAUXITE (Al₂O₃)</text>
-    
-    <rect x="182" y="126" width="76" height="74" fill="#172e3d" opacity="0.9"/>
-    <text x="220" y="166" font-family="'DM Mono', monospace" font-size="8" fill="#b7f36b" text-anchor="middle">LIMESTONE</text>
+  <g transform="translate(840, 50)" opacity="0.95">
+    <!-- Depth Strata Box -->
+    <rect x="0" y="0" width="310" height="320" rx="16" fill="#29231F" stroke="#493A30" stroke-width="1.5"/>
+    <rect x="15" y="15" width="280" height="55" rx="8" fill="#332922" stroke="#493A30"/>
+    <rect x="15" y="78" width="280" height="55" rx="8" fill="#3D2E24" stroke="#E98245" stroke-width="1.2"/>
+    <rect x="15" y="141" width="280" height="55" rx="8" fill="#2B221D" stroke="#493A30"/>
+    <rect x="15" y="204" width="280" height="55" rx="8" fill="#211B17" stroke="#493A30"/>
+    <rect x="15" y="267" width="280" height="38" rx="6" fill="#1A1512" stroke="#493A30"/>
 
-    <rect x="182" y="202" width="76" height="76" fill="#12202b" opacity="0.95"/>
-    <text x="220" y="244" font-family="'DM Mono', monospace" font-size="8" fill="#ff9d57" text-anchor="middle">BASEMENT</text>
+    <!-- Strata labels -->
+    <text x="30" y="47" font-family="'DM Mono', monospace" font-size="11" fill="#E8D6C1" font-weight="600">01. LATERITIC DURICRUST</text>
+    <text x="240" y="47" font-family="'DM Mono', monospace" font-size="10" fill="#B9AAA0">0–3.5m</text>
 
-    <!-- Depth Scale ticks -->
-    <g stroke="#42e5d1" stroke-width="1" opacity="0.7">
-      <line x1="168" y1="22" x2="178" y2="22"/>
-      <line x1="172" y1="50" x2="178" y2="50"/>
-      <line x1="168" y1="80" x2="178" y2="80"/>
-      <line x1="172" y1="110" x2="178" y2="110"/>
-      <line x1="168" y1="140" x2="178" y2="140"/>
-      <line x1="172" y1="170" x2="178" y2="170"/>
-      <line x1="168" y1="200" x2="178" y2="200"/>
-      <line x1="168" y1="278" x2="178" y2="278"/>
-    </g>
-    <text x="162" y="26" font-family="'DM Mono', monospace" font-size="7.5" fill="#698596" text-anchor="end">0.0m</text>
-    <text x="162" y="144" font-family="'DM Mono', monospace" font-size="7.5" fill="#698596" text-anchor="end">45.0m</text>
-    <text x="162" y="282" font-family="'DM Mono', monospace" font-size="7.5" fill="#698596" text-anchor="end">120.0m</text>
+    <text x="30" y="110" font-family="'DM Mono', monospace" font-size="11" fill="#FF9557" font-weight="700">02. BAUXITIC / ORE ZONE</text>
+    <text x="235" y="110" font-family="'DM Mono', monospace" font-size="10" fill="#FF9557">3.5–12m</text>
 
-    <!-- Radar Target reticle -->
-    <circle cx="70" cy="150" r="60" stroke="#1c3444" stroke-width="1" fill="none" stroke-dasharray="4 4"/>
-    <circle cx="70" cy="150" r="38" stroke="#25465c" stroke-width="1" fill="none"/>
-    <circle cx="70" cy="150" r="16" stroke="#42e5d1" stroke-width="1.2" fill="none" opacity="0.6"/>
-    <line x1="70" y1="80" x2="70" y2="220" stroke="#1e3a4e" stroke-width="1"/>
-    <line x1="0" y1="150" x2="140" y2="150" stroke="#1e3a4e" stroke-width="1"/>
-    <circle cx="70" cy="150" r="3" fill="#42e5d1"/>
-    
-    <!-- Target Indicator Pin -->
-    <circle cx="86" cy="132" r="4.5" fill="#b7f36b" filter="url(#badgeGlow)"/>
-    <text x="96" y="135" font-family="'DM Mono', monospace" font-size="8" fill="#b7f36b">SITE: PARPATIA</text>
+    <text x="30" y="173" font-family="'DM Mono', monospace" font-size="11" fill="#B9AAA0" font-weight="500">03. SAPROLITIC TRANSITION</text>
+    <text x="235" y="173" font-family="'DM Mono', monospace" font-size="10" fill="#87786E">12–22m</text>
+
+    <text x="30" y="236" font-family="'DM Mono', monospace" font-size="11" fill="#87786E" font-weight="500">04. CRYSTALLINE BASEMENT</text>
+    <text x="240" y="236" font-family="'DM Mono', monospace" font-size="10" fill="#87786E">&gt;22m</text>
+
+    <text x="30" y="291" font-family="'DM Mono', monospace" font-size="9.5" fill="#78B89A">✓ AUDITED BOREHOLE STRATA</text>
+    <circle cx="270" cy="286" r="3.5" fill="#78B89A"/>
   </g>
 
-  <!-- Left / Main Content Area -->
-  <g transform="translate(60, 48)">
-    <!-- Top System Status Pill -->
-    <g>
-      <rect x="0" y="0" width="310" height="26" rx="4" fill="#0d1a24" stroke="#1d3545" stroke-width="1"/>
-      <circle cx="14" cy="13" r="4" fill="#b7f36b" filter="url(#badgeGlow)"/>
-      <text x="26" y="17" font-family="'DM Mono', monospace" font-size="10" font-weight="600" fill="#a4bcc8" letter-spacing="1.2">
-        GEOSPATIAL INTELLIGENCE PLATFORM
-      </text>
-    </g>
+  <!-- Left Content: Title, Branding, Chips -->
+  <g transform="translate(60, 65)">
+    <!-- Status Pill -->
+    <rect x="0" y="0" width="280" height="28" rx="14" fill="#29231F" stroke="#493A30" stroke-width="1"/>
+    <circle cx="14" cy="14" r="4.5" fill="#78B89A" filter="url(#badgeGlow)"/>
+    <text x="28" y="18" font-family="'DM Mono', monospace" font-size="10" font-weight="500" fill="#F5EEE7" letter-spacing="1">
+      MINERAL EXPLORATION INTELLIGENCE
+    </text>
 
     <!-- Main Title -->
-    <text x="0" y="90" font-family="'Barlow Condensed', 'Arial Black', sans-serif" font-size="64" font-weight="900" fill="#e7f0f4" letter-spacing="3">
-      GEOMINE <tspan fill="#42e5d1">AI</tspan>
+    <text x="0" y="85" font-family="'Syne', sans-serif" font-size="54" font-weight="800" fill="#F5EEE7" letter-spacing="0.5">
+      GEOMINE <tspan fill="url(#copperBright)">AI</tspan>
     </text>
 
     <!-- Subtitle -->
-    <text x="2" y="124" font-family="'DM Mono', monospace" font-size="14.5" font-weight="500" fill="#8da3b1" letter-spacing="2">
-      MINERAL EXPLORATION &amp; ASSAY INTELLIGENCE SYSTEM
+    <text x="2" y="125" font-family="'DM Sans', sans-serif" font-size="17" fill="#B9AAA0" font-weight="400">
+      AI-Powered Subsurface Geoscience &amp; Exploration Analytics Portal
+    </text>
+    <text x="2" y="152" font-family="'DM Sans', sans-serif" font-size="13" fill="#87786E" font-weight="400">
+      Unifying 32,562 Historical Records · 18 Exploration Sites · Leaflet Geospatial Mapping
     </text>
 
-    <!-- Descriptive Tagline -->
-    <text x="2" y="156" font-family="'Manrope', sans-serif" font-size="13" fill="#b4c6d1" opacity="0.9">
-      Curated spatial database, drill-hole assay analytics, and reproducible geospatial ML pipelines
-    </text>
-    <text x="2" y="176" font-family="'Manrope', sans-serif" font-size="13" fill="#b4c6d1" opacity="0.9">
-      for Indian mineral exploration reports across 18 audited exploration site groups.
-    </text>
-
-    <!-- Metric Badges Row -->
-    <g transform="translate(0, 208)">
-      <!-- Badge 1: 32,562 Assays -->
-      <g>
-        <rect x="0" y="0" width="160" height="54" rx="4" fill="#0c1720" stroke="#223644" stroke-width="1"/>
-        <text x="14" y="22" font-family="'DM Mono', monospace" font-size="8.5" fill="#6e8594" letter-spacing="1">ASSAY OBSERVATIONS</text>
-        <text x="14" y="44" font-family="'Barlow Condensed', sans-serif" font-size="22" font-weight="700" fill="#b7f36b">32,562</text>
+    <!-- Core 4 Pillars / Navigation Badges -->
+    <g transform="translate(0, 180)">
+      <!-- Pillar 1: Dashboard -->
+      <g transform="translate(0, 0)">
+        <rect width="150" height="42" rx="8" fill="#29231F" stroke="#493A30" stroke-width="1.2"/>
+        <circle cx="18" cy="21" r="5" fill="#E98245"/>
+        <text x="32" y="25" font-family="'Syne', sans-serif" font-size="12" font-weight="700" fill="#F5EEE7">01. DASHBOARD</text>
       </g>
-
-      <!-- Badge 2: 18 Site Groups -->
-      <g transform="translate(172, 0)">
-        <rect x="0" y="0" width="150" height="54" rx="4" fill="#0c1720" stroke="#223644" stroke-width="1"/>
-        <text x="14" y="22" font-family="'DM Mono', monospace" font-size="8.5" fill="#6e8594" letter-spacing="1">EXPLORATION SITES</text>
-        <text x="14" y="44" font-family="'Barlow Condensed', sans-serif" font-size="22" font-weight="700" fill="#42e5d1">18 SITES</text>
+      <!-- Pillar 2: Explore Sites -->
+      <g transform="translate(162, 0)">
+        <rect width="165" height="42" rx="8" fill="#29231F" stroke="#E98245" stroke-width="1.5"/>
+        <circle cx="18" cy="21" r="5" fill="#FF9557"/>
+        <text x="32" y="25" font-family="'Syne', sans-serif" font-size="12" font-weight="700" fill="#FF9557">02. EXPLORE SITES</text>
       </g>
-
-      <!-- Badge 3: 10 Mineral Categories -->
-      <g transform="translate(334, 0)">
-        <rect x="0" y="0" width="165" height="54" rx="4" fill="#0c1720" stroke="#223644" stroke-width="1"/>
-        <text x="14" y="22" font-family="'DM Mono', monospace" font-size="8.5" fill="#6e8594" letter-spacing="1">MINERAL CATEGORIES</text>
-        <text x="14" y="44" font-family="'Barlow Condensed', sans-serif" font-size="22" font-weight="700" fill="#ff9d57">10 COMMODITIES</text>
+      <!-- Pillar 3: Analytics -->
+      <g transform="translate(339, 0)">
+        <rect width="150" height="42" rx="8" fill="#29231F" stroke="#493A30" stroke-width="1.2"/>
+        <circle cx="18" cy="21" r="5" fill="#78B89A"/>
+        <text x="32" y="25" font-family="'Syne', sans-serif" font-size="12" font-weight="700" fill="#F5EEE7">03. ANALYTICS</text>
       </g>
-
-      <!-- Badge 4: 7 Indian States -->
-      <g transform="translate(511, 0)">
-        <rect x="0" y="0" width="150" height="54" rx="4" fill="#0c1720" stroke="#223644" stroke-width="1"/>
-        <text x="14" y="22" font-family="'DM Mono', monospace" font-size="8.5" fill="#6e8594" letter-spacing="1">GEOGRAPHIC EXTENT</text>
-        <text x="14" y="44" font-family="'Barlow Condensed', sans-serif" font-size="22" font-weight="700" fill="#e7f0f4">7 STATES</text>
+      <!-- Pillar 4: Reports -->
+      <g transform="translate(501, 0)">
+        <rect width="140" height="42" rx="8" fill="#29231F" stroke="#493A30" stroke-width="1.2"/>
+        <circle cx="18" cy="21" r="5" fill="#E8D6C1"/>
+        <text x="32" y="25" font-family="'Syne', sans-serif" font-size="12" font-weight="700" fill="#F5EEE7">04. REPORTS</text>
       </g>
     </g>
-  </g>
 
-  <!-- Bottom Accent Line -->
-  <line x1="0" y1="378" x2="1200" y2="378" stroke="url(#cyanTeal)" stroke-width="2"/>
+    <!-- Bottom Metadata Metric Chips -->
+    <g transform="translate(0, 245)">
+      <rect x="0" y="0" width="135" height="48" rx="8" fill="#211D19" stroke="#493A30"/>
+      <text x="14" y="24" font-family="'Syne', sans-serif" font-size="18" font-weight="700" fill="#E98245">32,562</text>
+      <text x="14" y="39" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E" letter-spacing="0.5">ASSAY RECORDS</text>
+
+      <rect x="145" y="0" width="115" height="48" rx="8" fill="#211D19" stroke="#493A30"/>
+      <text x="159" y="24" font-family="'Syne', sans-serif" font-size="18" font-weight="700" fill="#E8D6C1">18 Sites</text>
+      <text x="159" y="39" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E" letter-spacing="0.5">GEOLOGICAL BLOCKS</text>
+
+      <rect x="270" y="0" width="125" height="48" rx="8" fill="#211D19" stroke="#493A30"/>
+      <text x="284" y="24" font-family="'Syne', sans-serif" font-size="18" font-weight="700" fill="#78B89A">10 Minerals</text>
+      <text x="284" y="39" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E" letter-spacing="0.5">COMMODITIES</text>
+
+      <rect x="405" y="0" width="135" height="48" rx="8" fill="#211D19" stroke="#493A30"/>
+      <text x="419" y="24" font-family="'Syne', sans-serif" font-size="18" font-weight="700" fill="#FF9557">CUDA Accel.</text>
+      <text x="419" y="39" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E" letter-spacing="0.5">NVIDIA RTX 3050</text>
+    </g>
+  </g>
 </svg>

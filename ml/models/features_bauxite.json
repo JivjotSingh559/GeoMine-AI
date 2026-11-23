@@ -1,0 +1,41 @@
+{
+  "mineral": "Bauxite",
+  "target_column": "target_bauxite",
+  "features": [
+    "latitude",
+    "longitude"
+  ],
+  "n_training_samples": 1069,
+  "positive_sites": [
+    "DUMARGUDA",
+    "PARPATIA",
+    "TARHAPANI-WEST"
+  ],
+  "negative_sites": [
+    "ALENGA-NENDWADI",
+    "ANAJI-KIOCL-27",
+    "GILANGUDA-PADUR",
+    "GOVINDPUR-W-SN",
+    "KARIMNAGAR-MOLYBDENITE",
+    "MARAMPALLI-JINJGAON",
+    "MURWADA-TUMARIKODI",
+    "MUTYALAMPADU-TANGEDA",
+    "OBALAPURA-KIOCL-28",
+    "PIMPERKUNTA-MN-G3",
+    "RAGHUNATHAPALEM-C3",
+    "RAMAPURAM",
+    "TADGAON-WATELI",
+    "TADGAON-WATELI-G4",
+    "TANGEDA"
+  ],
+  "device": "cuda",
+  "parameters": {
+    "n_estimators": 100,
+    "max_depth": 3,
+    "learning_rate": 0.05,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "random_state": 42,
+    "eval_metric": "logloss"
+  }
+}

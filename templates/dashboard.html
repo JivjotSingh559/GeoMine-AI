@@ -539,11 +539,137 @@
   </p>
 
   <div class="external-sources-grid" id="externalSourcesList">
-    <!-- Populated dynamically from /api/external/sources by dashboard.js -->
-    <div class="skeleton" style="height: 140px;"></div>
-    <div class="skeleton" style="height: 140px;"></div>
-    <div class="skeleton" style="height: 140px;"></div>
-    <div class="skeleton" style="height: 140px;"></div>
+    <!-- 1. NGDR -->
+    <div class="external-source-card">
+      <div class="external-source-header">
+        <div class="external-source-title-group">
+          <span class="external-source-name">National Geoscience Data Repository (NGDR)</span>
+          <span class="external-source-type">National Geospatial Portal</span>
+        </div>
+        <span class="external-source-status status-ref">Reference Integrated</span>
+      </div>
+      <span class="external-source-auth">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px; margin-right: 4px; opacity: 0.7;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Ministry of Mines / Geological Survey of India
+      </span>
+      <p class="external-source-desc">Baseline geoscience data, mineral occurrence maps, exploration blocks across India.</p>
+      <div class="external-source-footer">
+        <a href="https://geodataindia.gov.in/" target="_blank" rel="noopener noreferrer" class="external-source-link">
+          <span>Official Portal</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2. GSI -->
+    <div class="external-source-card">
+      <div class="external-source-header">
+        <div class="external-source-title-group">
+          <span class="external-source-name">Geological Survey of India (GSI)</span>
+          <span class="external-source-type">National Geological Survey</span>
+        </div>
+        <span class="external-source-status status-ref">Reference Integrated</span>
+      </div>
+      <span class="external-source-auth">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px; margin-right: 4px; opacity: 0.7;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Geological Survey of India, Ministry of Mines
+      </span>
+      <p class="external-source-desc">1:50k / 1:2M geological maps of India, lithostratigraphic columns, G-4 to G-2 stage exploration reports.</p>
+      <div class="external-source-footer">
+        <a href="https://www.gsi.gov.in/" target="_blank" rel="noopener noreferrer" class="external-source-link">
+          <span>Official Portal</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3. IBM -->
+    <div class="external-source-card">
+      <div class="external-source-header">
+        <div class="external-source-title-group">
+          <span class="external-source-name">Indian Bureau of Mines (IBM)</span>
+          <span class="external-source-type">Regulatory & Statistical Agency</span>
+        </div>
+        <span class="external-source-status status-ref">Reference Integrated</span>
+      </div>
+      <span class="external-source-auth">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px; margin-right: 4px; opacity: 0.7;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Indian Bureau of Mines, Ministry of Mines
+      </span>
+      <p class="external-source-desc">Indian Mineral Year Book (IMYB), threshold values of minerals, lease boundaries.</p>
+      <div class="external-source-footer">
+        <a href="https://ibm.gov.in/" target="_blank" rel="noopener noreferrer" class="external-source-link">
+          <span>Official Portal</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 4. OGD -->
+    <div class="external-source-card">
+      <div class="external-source-header">
+        <div class="external-source-title-group">
+          <span class="external-source-name">Open Government Data (OGD) India</span>
+          <span class="external-source-type">Open Data Portal</span>
+        </div>
+        <span class="external-source-status status-ref">Reference Integrated</span>
+      </div>
+      <span class="external-source-auth">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px; margin-right: 4px; opacity: 0.7;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        National Informatics Centre (NIC), MeitY
+      </span>
+      <p class="external-source-desc">District-level mineral production statistics, mining lease statistics, state resource inventories.</p>
+      <div class="external-source-footer">
+        <a href="https://data.gov.in/" target="_blank" rel="noopener noreferrer" class="external-source-link">
+          <span>Official Portal</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 5. Macrostrat -->
+    <div class="external-source-card">
+      <div class="external-source-header">
+        <div class="external-source-title-group">
+          <span class="external-source-name">Macrostrat Geological Database</span>
+          <span class="external-source-type">Stratigraphic REST API</span>
+        </div>
+        <span class="external-source-status status-active">API Connected</span>
+      </div>
+      <span class="external-source-auth">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px; margin-right: 4px; opacity: 0.7;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Macrostrat / Univ. of Wisconsin-Madison
+      </span>
+      <p class="external-source-desc">Global stratigraphic units, age estimates, lithological classes for Indian Precambrian basements.</p>
+      <div class="external-source-footer">
+        <a href="https://macrostrat.org/api" target="_blank" rel="noopener noreferrer" class="external-source-link">
+          <span>API Reference</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 6. USGS -->
+    <div class="external-source-card">
+      <div class="external-source-header">
+        <div class="external-source-title-group">
+          <span class="external-source-name">USGS Mineral Resources Program</span>
+          <span class="external-source-type">Global Intelligence Agency</span>
+        </div>
+        <span class="external-source-status status-ref">Reference Integrated</span>
+      </div>
+      <span class="external-source-auth">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px; margin-right: 4px; opacity: 0.7;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        United States Geological Survey
+      </span>
+      <p class="external-source-desc">Mineral Commodity Summaries, global deposit models, geochemical background baselines.</p>
+      <div class="external-source-footer">
+        <a href="https://www.usgs.gov/" target="_blank" rel="noopener noreferrer" class="external-source-link">
+          <span>Official Portal</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 

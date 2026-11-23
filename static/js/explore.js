@@ -24,7 +24,14 @@ const exploreState = {
   },
   markers: {},
   splitMarkers: {},
-  activeSiteId: null
+  activeSiteId: null,
+  affinity: {
+    probeMarkerMain: null,
+    probeMarkerSplit: null,
+    activeCoords: null,
+    activeResult: null,
+    isLoading: false
+  }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function initExplorePage() {
   initEventListeners();
+  initAffinityProbe();
   await loadFilterOptions();
   await loadMineralChips();
   await fetchAndRenderSites();
@@ -206,6 +214,9 @@ async function loadMineralChips() {
         exploreState.selectedMineral = chip.dataset.mineral;
         updateActiveFilterTags();
         fetchAndRenderSites();
+
+        // Sync with Spatial Affinity Probe selector
+        syncAffinityMineralWithChip(chip.dataset.mineral);
       });
     });
   } catch (err) {
@@ -366,11 +377,15 @@ function initMap(mapId) {
     scrollWheelZoom: true
   }).setView([21.5, 80.5], 5);
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-    subdomains: 'abcd',
-    maxZoom: 18
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19
   }).addTo(map);
+
+  // Map Click Listener for Spatial Affinity Probe (Pathway A)
+  map.on('click', (e) => {
+    handleMapProbeClick(e.latlng.lat, e.latlng.lng, mapId);
+  });
 
   return map;
 }
@@ -636,8 +651,9 @@ async function openSiteDrawer(siteId) {
       if (miniMapContainer) {
         if (!exploreState.maps.mini) {
           exploreState.maps.mini = L.map('drawerMiniMap', { zoomControl: false }).setView([detail.latitude, detail.longitude], 10);
-          L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; CARTO'
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
           }).addTo(exploreState.maps.mini);
         } else {
           exploreState.maps.mini.setView([detail.latitude, detail.longitude], 10);
@@ -774,4 +790,330 @@ function resetAllFilters() {
   updateActiveFilterTags();
   fetchAndRenderSites();
   window.GeoMine.toast('All filters have been reset', 'info');
+}
+
+/* ══════════════════════════════════════════════════════════════
+   Spatial Affinity Engine — Pathway A Integration
+   ══════════════════════════════════════════════════════════════ */
+
+function syncAffinityMineralWithChip(chipMineral) {
+  if (!chipMineral) return;
+  const mLower = chipMineral.toLowerCase();
+  const sel = document.getElementById('affinityMineralSelect');
+  if (!sel) return;
+
+  if (mLower.includes('iron')) {
+    sel.value = 'Iron Ore';
+  } else if (mLower.includes('lime')) {
+    sel.value = 'Limestone';
+  } else if (mLower.includes('bauxite')) {
+    sel.value = 'Bauxite';
+  } else if (mLower.includes('manganese')) {
+    sel.value = 'Manganese';
+  }
+}
+
+function initAffinityProbe() {
+  const btnRun = document.getElementById('btnRunAffinity');
+  const btnClear = document.getElementById('btnClearAffinity');
+  const mineralSelect = document.getElementById('affinityMineralSelect');
+  const latInput = document.getElementById('affinityLatInput');
+  const lonInput = document.getElementById('affinityLonInput');
+
+  if (btnRun) {
+    btnRun.addEventListener('click', () => {
+      const latVal = parseFloat(latInput?.value);
+      const lonVal = parseFloat(lonInput?.value);
+      const mineralVal = mineralSelect?.value || 'Iron Ore';
+
+      if (isNaN(latVal) || isNaN(lonVal)) {
+        window.GeoMine.toast('Please input valid numeric coordinates or click on the map', 'warning');
+        return;
+      }
+      if (latVal < -90 || latVal > 90 || lonVal < -180 || lonVal > 180) {
+        window.GeoMine.toast('Coordinates are outside valid latitude [-90, 90] or longitude [-180, 180]', 'warning');
+        return;
+      }
+
+      placeProbeMarker(latVal, lonVal, false);
+      runAffinityCalculation(latVal, lonVal, mineralVal, true);
+    });
+  }
+
+  if (btnClear) {
+    btnClear.addEventListener('click', () => {
+      clearProbePin();
+    });
+  }
+
+  if (mineralSelect) {
+    mineralSelect.addEventListener('change', () => {
+      if (exploreState.affinity.activeCoords) {
+        const { lat, lon } = exploreState.affinity.activeCoords;
+        runAffinityCalculation(lat, lon, mineralSelect.value, true);
+      }
+    });
+  }
+}
+
+function handleMapProbeClick(lat, lon, mapId) {
+  const latInput = document.getElementById('affinityLatInput');
+  const lonInput = document.getElementById('affinityLonInput');
+  const mineralSelect = document.getElementById('affinityMineralSelect');
+
+  if (latInput) latInput.value = lat.toFixed(5);
+  if (lonInput) lonInput.value = lon.toFixed(5);
+
+  const mineral = mineralSelect?.value || 'Iron Ore';
+
+  placeProbeMarker(lat, lon, false);
+  runAffinityCalculation(lat, lon, mineral, true);
+}
+
+function placeProbeMarker(lat, lon, autoOpen = false) {
+  // Clean up existing probe markers
+  if (exploreState.affinity.probeMarkerMain && exploreState.maps.main) {
+    exploreState.maps.main.removeLayer(exploreState.affinity.probeMarkerMain);
+    exploreState.affinity.probeMarkerMain = null;
+  }
+  if (exploreState.affinity.probeMarkerSplit && exploreState.maps.split) {
+    exploreState.maps.split.removeLayer(exploreState.affinity.probeMarkerSplit);
+    exploreState.affinity.probeMarkerSplit = null;
+  }
+
+  exploreState.affinity.activeCoords = { lat, lon };
+
+  const probeIcon = L.divIcon({
+    className: '',
+    html: '<div class="probe-pin-container"><div class="probe-pin-center"></div><div class="probe-pin-pulse"></div></div>',
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -12]
+  });
+
+  if (exploreState.maps.main) {
+    exploreState.affinity.probeMarkerMain = L.marker([lat, lon], { icon: probeIcon }).addTo(exploreState.maps.main);
+  }
+  if (exploreState.maps.split) {
+    exploreState.affinity.probeMarkerSplit = L.marker([lat, lon], { icon: probeIcon }).addTo(exploreState.maps.split);
+  }
+}
+
+async function runAffinityCalculation(lat, lon, mineral, autoOpenPopup = true) {
+  const container = document.getElementById('affinityResultContainer');
+  if (!container) return;
+
+  container.style.display = 'block';
+  container.innerHTML = `
+    <div style="padding: 12px; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); margin-top: 10px; text-align: center;">
+      <div class="skeleton" style="height: 18px; width: 60%; margin: 0 auto 8px;"></div>
+      <div class="skeleton" style="height: 36px; width: 40%; margin: 0 auto 8px;"></div>
+      <div class="skeleton" style="height: 14px; width: 80%; margin: 0 auto;"></div>
+    </div>
+  `;
+
+  try {
+    const res = await fetch('/api/predict/affinity', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        mineral: mineral,
+        latitude: lat,
+        longitude: lon
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok && data.status !== 'insufficient_data') {
+      throw new Error(data.message || 'Spatial affinity calculation failed');
+    }
+
+    exploreState.affinity.activeResult = data;
+    renderAffinityResultInSidebar(data);
+
+    // Update marker popups on maps
+    const popupHtml = buildAffinityPopupContent(data);
+    if (exploreState.affinity.probeMarkerMain) {
+      exploreState.affinity.probeMarkerMain.bindPopup(popupHtml, { maxWidth: 300 });
+      if (autoOpenPopup && exploreState.currentView === 'map') {
+        exploreState.affinity.probeMarkerMain.openPopup();
+      }
+    }
+    if (exploreState.affinity.probeMarkerSplit) {
+      exploreState.affinity.probeMarkerSplit.bindPopup(popupHtml, { maxWidth: 300 });
+      if (autoOpenPopup && exploreState.currentView === 'split') {
+        exploreState.affinity.probeMarkerSplit.openPopup();
+      }
+    }
+  } catch (err) {
+    console.error('Affinity calculation error:', err);
+    container.innerHTML = `
+      <div style="background: rgba(224, 82, 82, 0.1); border: 1px solid rgba(224, 82, 82, 0.4); border-radius: var(--radius); padding: 10px; margin-top: 10px; font-size: 11px; color: #ff8b8b;">
+        <strong>Error:</strong> ${window.GeoMine.esc(err.message)}
+      </div>
+    `;
+  }
+}
+
+function renderAffinityResultInSidebar(res) {
+  const container = document.getElementById('affinityResultContainer');
+  if (!container) return;
+
+  container.style.display = 'block';
+
+  // Case 1: Manganese / Insufficient Data
+  if (res.status === 'insufficient_data') {
+    container.innerHTML = `
+      <div style="background: rgba(185, 109, 67, 0.15); border: 1px solid #B96D43; border-radius: var(--radius); padding: 12px; margin-top: 10px;">
+        <div style="display: flex; align-items: center; gap: 6px; color: var(--accent); font-weight: 700; font-size: 11px; margin-bottom: 6px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          <span>INSUFFICIENT HISTORICAL DATA</span>
+        </div>
+        <div style="font-size: 12px; color: var(--text-primary); font-weight: 600; margin-bottom: 6px; line-height: 1.4;">
+          ${window.GeoMine.esc(res.message)}
+        </div>
+        <div style="font-size: 11px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 8px;">
+          ${window.GeoMine.esc(res.scientific_interpretation)}
+        </div>
+        <div style="font-size: 10px; color: var(--text-muted); background: var(--bg-card); padding: 8px; border-radius: 4px; border: 1px solid var(--border); line-height: 1.4;">
+          <strong>Scientific Principle:</strong> ${window.GeoMine.esc(res.limitation_disclosure)}
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  // Case 2: Success (Iron Ore, Limestone, Bauxite)
+  let badgeClass = 'badge-muted';
+  if (res.affinity_score >= 80) badgeClass = 'badge-accent';
+  else if (res.affinity_score >= 50) badgeClass = 'badge-success';
+  else if (res.affinity_score >= 25) badgeClass = 'badge-warning';
+
+  let breakdownHtml = '';
+  if (res.site_proximity_breakdown && res.site_proximity_breakdown.length) {
+    breakdownHtml = `
+      <details style="margin-top: 10px; font-size: 11px; color: var(--text-secondary); cursor: pointer;">
+        <summary style="font-weight: 600; color: var(--accent); margin-bottom: 6px;">
+          Distance to Reference Blocks (${res.reference_sites_count} sites)
+        </summary>
+        <ul class="affinity-breakdown-list">
+          ${res.site_proximity_breakdown.map(s => `
+            <li>
+              <span>${window.GeoMine.esc(s.site_name)} (${window.GeoMine.esc(s.district)})</span>
+              <strong style="color: var(--sand); font-family: var(--font-mono);">${s.min_distance_km} km</strong>
+            </li>
+          `).join('')}
+        </ul>
+      </details>
+    `;
+  }
+
+  container.innerHTML = `
+    <div class="affinity-result-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font: 700 11px var(--font-mono); color: var(--sand);">${window.GeoMine.esc(res.mineral.toUpperCase())} AFFINITY</span>
+        <span class="badge ${badgeClass}" style="font-size: 9px; padding: 2px 7px;">${window.GeoMine.esc(res.score_tier)}</span>
+      </div>
+
+      <div style="display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px;">
+        <span class="affinity-score-val">${res.affinity_score}</span>
+        <span style="font-size: 12px; color: var(--text-muted); font-family: var(--font-mono);">/ 100</span>
+      </div>
+
+      <div style="font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; line-height: 1.4;">
+        Closest Block: <strong style="color: var(--text-primary);">${window.GeoMine.esc(res.nearest_site.site_name)}</strong><br>
+        Distance: <strong style="color: var(--accent-bright); font-family: var(--font-mono);">${res.distance_km} km</strong> (${window.GeoMine.esc(res.nearest_site.district)}, ${window.GeoMine.esc(res.nearest_site.state)})
+      </div>
+
+      <div style="font-size: 10px; color: var(--text-muted); margin-bottom: 8px;">
+        Archive Reference: ${res.reference_sites_count} blocks, ${res.reference_locations_count} coordinate points
+      </div>
+
+      <div style="font-size: 10px; color: var(--text-secondary); background: var(--bg-card); padding: 8px; border-radius: 4px; border: 1px solid var(--border); line-height: 1.4;">
+        <strong style="color: var(--accent);">Scientific Interpretation:</strong> ${window.GeoMine.esc(res.scientific_interpretation)}
+      </div>
+
+      ${breakdownHtml}
+
+      <div style="font-size: 9px; color: var(--text-muted); margin-top: 8px; border-top: 1px solid var(--border); padding-top: 6px; line-height: 1.3;">
+        ${window.GeoMine.esc(res.limitation_disclosure)}
+      </div>
+    </div>
+  `;
+}
+
+function buildAffinityPopupContent(res) {
+  if (res.status === 'insufficient_data') {
+    return `
+      <div style="font-family: var(--font-body); min-width: 200px; padding: 4px;">
+        <div style="color: var(--accent); font-weight: 700; font-size: 11px; margin-bottom: 4px;">
+          ⚠️ Insufficient Reference Data
+        </div>
+        <div style="font-size: 11px; color: #F5EEE7; font-weight: 600; margin-bottom: 4px;">
+          ${window.GeoMine.esc(res.mineral)}: Model refrains from scoring
+        </div>
+        <div style="font-size: 10px; color: #B9AAA0; line-height: 1.3;">
+          Only 1 historical reference site available. Spatial extrapolation would produce false confidence.
+        </div>
+      </div>
+    `;
+  }
+
+  let badgeColor = '#B96D43';
+  if (res.affinity_score >= 80) badgeColor = '#E98245';
+  else if (res.affinity_score >= 50) badgeColor = '#78B89A';
+
+  return `
+    <div style="font-family: var(--font-body); min-width: 220px; padding: 4px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+        <strong style="color: var(--sand); font-size: 11px; font-family: var(--font-mono);">${window.GeoMine.esc(res.mineral.toUpperCase())} AFFINITY</strong>
+        <span style="font-size: 9px; padding: 1px 6px; border-radius: 9999px; background: rgba(233,130,69,0.15); color: ${badgeColor}; border: 1px solid ${badgeColor};">
+          ${window.GeoMine.esc(res.score_tier)}
+        </span>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 4px; margin: 4px 0;">
+        <span style="font: 800 24px var(--font-mono); color: var(--accent);">${res.affinity_score}</span>
+        <span style="font-size: 11px; color: #87786E; font-family: var(--font-mono);">/ 100</span>
+      </div>
+      <div style="font-size: 11px; color: #F5EEE7; margin-bottom: 2px;">
+        Nearest: <b>${window.GeoMine.esc(res.nearest_site.site_name)}</b>
+      </div>
+      <div style="font-size: 11px; color: #B9AAA0; margin-bottom: 6px;">
+        Distance: <b style="color: #FF9557; font-family: var(--font-mono);">${res.distance_km} km</b>
+      </div>
+      <div style="font-size: 9px; color: #87786E; border-top: 1px solid rgba(73, 58, 48, 0.6); padding-top: 4px; line-height: 1.3;">
+        Spatial proximity index (Pathway A). Not an occurrence probability.
+      </div>
+    </div>
+  `;
+}
+
+function clearProbePin() {
+  if (exploreState.affinity.probeMarkerMain && exploreState.maps.main) {
+    exploreState.maps.main.removeLayer(exploreState.affinity.probeMarkerMain);
+    exploreState.affinity.probeMarkerMain = null;
+  }
+  if (exploreState.affinity.probeMarkerSplit && exploreState.maps.split) {
+    exploreState.maps.split.removeLayer(exploreState.affinity.probeMarkerSplit);
+    exploreState.affinity.probeMarkerSplit = null;
+  }
+
+  exploreState.affinity.activeCoords = null;
+  exploreState.affinity.activeResult = null;
+
+  const latInput = document.getElementById('affinityLatInput');
+  const lonInput = document.getElementById('affinityLonInput');
+  const resultContainer = document.getElementById('affinityResultContainer');
+
+  if (latInput) latInput.value = '';
+  if (lonInput) lonInput.value = '';
+  if (resultContainer) {
+    resultContainer.innerHTML = '';
+    resultContainer.style.display = 'none';
+  }
+
+  window.GeoMine.toast('Probe pin and affinity results cleared', 'info');
 }
