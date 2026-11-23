@@ -1,0 +1,391 @@
+{
+  "Iron Ore": {
+    "mineral": "Iron Ore",
+    "target_column": "target_iron_ore",
+    "features": [
+      "latitude",
+      "longitude"
+    ],
+    "trained": true,
+    "device_used": "cuda",
+    "parameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.05,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "random_state": 42,
+      "eval_metric": "logloss"
+    },
+    "dataset_summary": {
+      "total_locations": 1069,
+      "positive_locations": 505,
+      "negative_locations": 564,
+      "positive_sites": [
+        "ALENGA-NENDWADI",
+        "GILANGUDA-PADUR",
+        "MARAMPALLI-JINJGAON",
+        "MURWADA-TUMARIKODI",
+        "TADGAON-WATELI",
+        "TADGAON-WATELI-G4"
+      ],
+      "negative_sites": [
+        "ANAJI-KIOCL-27",
+        "DUMARGUDA",
+        "GOVINDPUR-W-SN",
+        "KARIMNAGAR-MOLYBDENITE",
+        "MUTYALAMPADU-TANGEDA",
+        "OBALAPURA-KIOCL-28",
+        "PARPATIA",
+        "PIMPERKUNTA-MN-G3",
+        "RAGHUNATHAPALEM-C3",
+        "RAMAPURAM",
+        "TANGEDA",
+        "TARHAPANI-WEST"
+      ]
+    },
+    "evaluation_strategy": "GroupKFold (3 folds grouped by site_id)",
+    "cross_validation_folds": [
+      {
+        "fold": 1,
+        "val_sites": [
+          "KARIMNAGAR-MOLYBDENITE",
+          "MUTYALAMPADU-TANGEDA",
+          "PIMPERKUNTA-MN-G3",
+          "RAGHUNATHAPALEM-C3",
+          "TADGAON-WATELI-G4",
+          "TARHAPANI-WEST"
+        ],
+        "n_val": 356,
+        "n_pos_val": 80,
+        "accuracy": 0.797752808988764,
+        "precision": 0.5263157894736842,
+        "recall": 1.0,
+        "f1": 0.6896551724137931,
+        "roc_auc": 1.0
+      },
+      {
+        "fold": 2,
+        "val_sites": [
+          "ANAJI-KIOCL-27",
+          "DUMARGUDA",
+          "GOVINDPUR-W-SN",
+          "MURWADA-TUMARIKODI",
+          "OBALAPURA-KIOCL-28",
+          "PARPATIA"
+        ],
+        "n_val": 358,
+        "n_pos_val": 85,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "roc_auc": 1.0
+      },
+      {
+        "fold": 3,
+        "val_sites": [
+          "ALENGA-NENDWADI",
+          "GILANGUDA-PADUR",
+          "MARAMPALLI-JINJGAON",
+          "RAMAPURAM",
+          "TADGAON-WATELI",
+          "TANGEDA"
+        ],
+        "n_val": 355,
+        "n_pos_val": 340,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "roc_auc": 1.0
+      }
+    ],
+    "aggregate_metrics": {
+      "accuracy": 0.9326473339569691,
+      "majority_baseline_accuracy": 0.5275958840037418,
+      "precision": 0.8752166377816292,
+      "recall": 1.0,
+      "f1_score": 0.933456561922366,
+      "roc_auc": 0.959300610912155,
+      "brier_score": 0.06183433750480507,
+      "baseline_brier_score": 0.2492384671860521,
+      "confusion_matrix": [
+        [
+          492,
+          72
+        ],
+        [
+          0,
+          505
+        ]
+      ]
+    },
+    "scientific_caveats": [
+      "Probabilities are empirical statistical estimations based solely on spatial coordinates.",
+      "Predictions should not be interpreted as geological certainty or definitive proof of commercial mineralization.",
+      "Site-to-site geological variation, overburden, weathering depth, and unobserved lithologies constrain generalizability to unseen exploration provinces."
+    ]
+  },
+  "Limestone": {
+    "mineral": "Limestone",
+    "target_column": "target_limestone",
+    "features": [
+      "latitude",
+      "longitude"
+    ],
+    "trained": true,
+    "device_used": "cuda",
+    "parameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.05,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "random_state": 42,
+      "eval_metric": "logloss"
+    },
+    "dataset_summary": {
+      "total_locations": 1069,
+      "positive_locations": 47,
+      "negative_locations": 1022,
+      "positive_sites": [
+        "MUTYALAMPADU-TANGEDA",
+        "RAGHUNATHAPALEM-C3",
+        "RAMAPURAM",
+        "TANGEDA"
+      ],
+      "negative_sites": [
+        "ALENGA-NENDWADI",
+        "ANAJI-KIOCL-27",
+        "DUMARGUDA",
+        "GILANGUDA-PADUR",
+        "GOVINDPUR-W-SN",
+        "KARIMNAGAR-MOLYBDENITE",
+        "MARAMPALLI-JINJGAON",
+        "MURWADA-TUMARIKODI",
+        "OBALAPURA-KIOCL-28",
+        "PARPATIA",
+        "PIMPERKUNTA-MN-G3",
+        "TADGAON-WATELI",
+        "TADGAON-WATELI-G4",
+        "TARHAPANI-WEST"
+      ]
+    },
+    "evaluation_strategy": "GroupKFold (3 folds grouped by site_id)",
+    "cross_validation_folds": [
+      {
+        "fold": 1,
+        "val_sites": [
+          "KARIMNAGAR-MOLYBDENITE",
+          "MUTYALAMPADU-TANGEDA",
+          "PIMPERKUNTA-MN-G3",
+          "RAGHUNATHAPALEM-C3",
+          "TADGAON-WATELI-G4",
+          "TARHAPANI-WEST"
+        ],
+        "n_val": 356,
+        "n_pos_val": 32,
+        "accuracy": 0.9213483146067416,
+        "precision": 1.0,
+        "recall": 0.125,
+        "f1": 0.2222222222222222,
+        "roc_auc": 0.6057098765432098
+      },
+      {
+        "fold": 2,
+        "val_sites": [
+          "ANAJI-KIOCL-27",
+          "DUMARGUDA",
+          "GOVINDPUR-W-SN",
+          "MURWADA-TUMARIKODI",
+          "OBALAPURA-KIOCL-28",
+          "PARPATIA"
+        ],
+        "n_val": 358,
+        "n_pos_val": 0,
+        "accuracy": 1.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": null
+      },
+      {
+        "fold": 3,
+        "val_sites": [
+          "ALENGA-NENDWADI",
+          "GILANGUDA-PADUR",
+          "MARAMPALLI-JINJGAON",
+          "RAMAPURAM",
+          "TADGAON-WATELI",
+          "TANGEDA"
+        ],
+        "n_val": 355,
+        "n_pos_val": 15,
+        "accuracy": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "roc_auc": 1.0
+      }
+    ],
+    "aggregate_metrics": {
+      "accuracy": 0.9738072965388214,
+      "majority_baseline_accuracy": 0.9560336763330215,
+      "precision": 1.0,
+      "recall": 0.40425531914893614,
+      "f1_score": 0.5757575757575758,
+      "roc_auc": 0.833867677062081,
+      "brier_score": 0.06291445179163234,
+      "baseline_brier_score": 0.042033286050188974,
+      "confusion_matrix": [
+        [
+          1022,
+          0
+        ],
+        [
+          28,
+          19
+        ]
+      ]
+    },
+    "scientific_caveats": [
+      "Probabilities are empirical statistical estimations based solely on spatial coordinates.",
+      "Predictions should not be interpreted as geological certainty or definitive proof of commercial mineralization.",
+      "Site-to-site geological variation, overburden, weathering depth, and unobserved lithologies constrain generalizability to unseen exploration provinces."
+    ]
+  },
+  "Bauxite": {
+    "mineral": "Bauxite",
+    "target_column": "target_bauxite",
+    "features": [
+      "latitude",
+      "longitude"
+    ],
+    "trained": true,
+    "device_used": "cuda",
+    "parameters": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.05,
+      "subsample": 0.8,
+      "colsample_bytree": 0.8,
+      "random_state": 42,
+      "eval_metric": "logloss"
+    },
+    "dataset_summary": {
+      "total_locations": 1069,
+      "positive_locations": 196,
+      "negative_locations": 873,
+      "positive_sites": [
+        "DUMARGUDA",
+        "PARPATIA",
+        "TARHAPANI-WEST"
+      ],
+      "negative_sites": [
+        "ALENGA-NENDWADI",
+        "ANAJI-KIOCL-27",
+        "GILANGUDA-PADUR",
+        "GOVINDPUR-W-SN",
+        "KARIMNAGAR-MOLYBDENITE",
+        "MARAMPALLI-JINJGAON",
+        "MURWADA-TUMARIKODI",
+        "MUTYALAMPADU-TANGEDA",
+        "OBALAPURA-KIOCL-28",
+        "PIMPERKUNTA-MN-G3",
+        "RAGHUNATHAPALEM-C3",
+        "RAMAPURAM",
+        "TADGAON-WATELI",
+        "TADGAON-WATELI-G4",
+        "TANGEDA"
+      ]
+    },
+    "evaluation_strategy": "GroupKFold (3 folds grouped by site_id)",
+    "cross_validation_folds": [
+      {
+        "fold": 1,
+        "val_sites": [
+          "KARIMNAGAR-MOLYBDENITE",
+          "MUTYALAMPADU-TANGEDA",
+          "PIMPERKUNTA-MN-G3",
+          "RAGHUNATHAPALEM-C3",
+          "TADGAON-WATELI-G4",
+          "TARHAPANI-WEST"
+        ],
+        "n_val": 356,
+        "n_pos_val": 72,
+        "accuracy": 0.797752808988764,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": 0.9084507042253521
+      },
+      {
+        "fold": 2,
+        "val_sites": [
+          "ANAJI-KIOCL-27",
+          "DUMARGUDA",
+          "GOVINDPUR-W-SN",
+          "MURWADA-TUMARIKODI",
+          "OBALAPURA-KIOCL-28",
+          "PARPATIA"
+        ],
+        "n_val": 358,
+        "n_pos_val": 124,
+        "accuracy": 0.6536312849162011,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": 1.0
+      },
+      {
+        "fold": 3,
+        "val_sites": [
+          "ALENGA-NENDWADI",
+          "GILANGUDA-PADUR",
+          "MARAMPALLI-JINJGAON",
+          "RAMAPURAM",
+          "TADGAON-WATELI",
+          "TANGEDA"
+        ],
+        "n_val": 355,
+        "n_pos_val": 0,
+        "accuracy": 1.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "roc_auc": null
+      }
+    ],
+    "aggregate_metrics": {
+      "accuracy": 0.8166510757717493,
+      "majority_baseline_accuracy": 0.8166510757717493,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "roc_auc": 0.7811908268462023,
+      "brier_score": 0.13831841900310501,
+      "baseline_brier_score": 0.1497320962125939,
+      "confusion_matrix": [
+        [
+          873,
+          0
+        ],
+        [
+          196,
+          0
+        ]
+      ]
+    },
+    "scientific_caveats": [
+      "Probabilities are empirical statistical estimations based solely on spatial coordinates.",
+      "Predictions should not be interpreted as geological certainty or definitive proof of commercial mineralization.",
+      "Site-to-site geological variation, overburden, weathering depth, and unobserved lithologies constrain generalizability to unseen exploration provinces."
+    ]
+  },
+  "Manganese": {
+    "mineral": "Manganese",
+    "trained": false,
+    "reason": "Only 1 positive site in dataset. Independent grouped cross-validation is impossible without severe spatial data leakage."
+  }
+}

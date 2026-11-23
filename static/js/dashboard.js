@@ -154,37 +154,41 @@ async function loadExternalSources() {
 
   try {
     const sources = await window.GeoMine.getJSON('/api/external/sources');
-    container.innerHTML = sources.map(src => {
+    if (!sources || !sources.length) return;
+
+    container.innerHTML = sources.map((src, idx) => {
       const isOnline = src.status.toLowerCase().includes('active') || src.status.toLowerCase().includes('connected');
       const badgeCls = isOnline ? 'status-active' : 'status-ref';
+      const typeBadge = src.type ? `<span class="external-source-type">${window.GeoMine.esc(src.type)}</span>` : '';
       return `
-        <div class="external-source-card" data-reveal="scale">
+        <div class="external-source-card ext-card-animate" style="animation-delay: ${idx * 0.08}s;">
           <div class="external-source-header">
-            <span class="external-source-name">${window.GeoMine.esc(src.name)}</span>
+            <div class="external-source-title-group">
+              <span class="external-source-name">${window.GeoMine.esc(src.name)}</span>
+              ${typeBadge}
+            </div>
             <span class="external-source-status ${badgeCls}">${src.status}</span>
           </div>
-          <span class="external-source-auth">${window.GeoMine.esc(src.authority)}</span>
-          <p class="external-source-desc">${window.GeoMine.esc(src.coverage)}</p>
-          <a href="${src.url}" target="_blank" rel="noopener noreferrer" class="external-source-link">
-            <span>Official Portal</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          <span class="external-source-auth">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -1px; margin-right: 4px; opacity: 0.7;">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
-          </a>
+            ${window.GeoMine.esc(src.authority)}
+          </span>
+          <p class="external-source-desc">${window.GeoMine.esc(src.coverage)}</p>
+          <div class="external-source-footer">
+            <a href="${src.url}" target="_blank" rel="noopener noreferrer" class="external-source-link">
+              <span>Official Portal</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          </div>
         </div>
       `;
     }).join('');
-
-    // Re-initialize scroll reveal for dynamically added cards
-    if (window.GeoMine && typeof window.GeoMine.initReveal === 'function') {
-      window.GeoMine.initReveal();
-    }
   } catch (err) {
-    container.innerHTML = `
-      <div style="grid-column: 1/-1; padding: 20px; color: var(--text-muted); font-size: 13px;">
-        Authoritative external repositories documented: National Geoscience Data Repository (NGDR), Geological Survey of India (GSI), Indian Bureau of Mines (IBM), Open Government Data (data.gov.in), Macrostrat API, USGS, and OpenStreetMap.
-      </div>
-    `;
+    console.warn('External sources fallback active:', err);
   }
 }
 

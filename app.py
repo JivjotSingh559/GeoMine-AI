@@ -8,6 +8,7 @@ import json
 import pandas as pd
 import numpy as np
 from flask import Flask, jsonify, render_template, request
+from ml.spatial_affinity import SpatialAffinityEngine
 
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "GeoMineAI_Final_Model_Training_Clean_v1.csv"
@@ -28,6 +29,9 @@ for col in ["latitude", "longitude", "target_value", "target_training_weight"]:
 
 df = df_raw.dropna(subset=["latitude", "longitude", "target_mineral", "site_id", "site_name"]).copy()
 df = df[df["latitude"].between(-90, 90) & df["longitude"].between(-180, 180)]
+
+# Initialize Spatial Affinity Prediction Engine (Pathway A)
+affinity_engine = SpatialAffinityEngine()
 
 # ── Helpers ───────────────────────────────────────────────────
 def _safe(v):
@@ -625,6 +629,138 @@ def api_external_geology():
             "data_mode": "Authoritative Reference Framework (External Enrichment)"
         }
     })
+
+# ── Spatial Affinity / Prediction Engine API (Pathway A) ─────────────
+@app.route("/api/predict/affinity", methods=["POST"])
+@app.route("/api/spatial-affinity", methods=["GET", "POST"])
+def api_spatial_affinity():
+    """
+    Compute Spatial Affinity Score (Pathway A) for a query coordinate and mineral.
+    Accepts JSON body or query parameters: mineral, latitude (or lat), longitude (or lon).
+    """
+    if request.method == "POST":
+        data = request.get_json(silent=True) or request.form.to_dict() or {}
+        mineral = data.get("mineral")
+        lat = data.get("latitude") if "latitude" in data else data.get("lat")
+        lon = data.get("longitude") if "longitude" in data else data.get("lon")
+        bandwidth = data.get("bandwidth_km", 50.0)
+    else:
+        mineral = request.args.get("mineral")
+        lat = request.args.get("latitude", request.args.get("lat"))
+        lon = request.args.get("longitude", request.args.get("lon"))
+        bandwidth = request.args.get("bandwidth_km", 50.0)
+
+    if not mineral:
+        return jsonify({
+            "status": "error",
+            "message": "Missing required parameter 'mineral'. Supported: Iron Ore, Limestone, Bauxite, Manganese."
+        }), 400
+
+    if lat is None or lon is None:
+        return jsonify({
+            "status": "error",
+            "message": "Missing required coordinate parameters 'latitude' and 'longitude'."
+        }), 400
+
+    try:
+        lat = float(lat)
+        lon = float(lon)
+        bandwidth = float(bandwidth)
+    except (ValueError, TypeError):
+        return jsonify({
+            "status": "error",
+            "message": "Coordinates 'latitude' and 'longitude' must be valid numeric floating-point values."
+        }), 400
+
+    if not (-90.0 <= lat <= 90.0):
+        return jsonify({
+            "status": "error",
+            "message": f"Latitude {lat} is out of valid range [-90.0, 90.0]."
+        }), 400
+
+    if not (-180.0 <= lon <= 180.0):
+        return jsonify({
+            "status": "error",
+            "message": f"Longitude {lon} is out of valid range [-180.0, 180.0]."
+        }), 400
+
+    try:
+        result = affinity_engine.compute_affinity(
+            mineral=mineral,
+            latitude=lat,
+            longitude=lon,
+            bandwidth_km=bandwidth
+        )
+        return jsonify(result), 200
+    except ValueError as e:
+        return jsonify({"status": "error", "message": str(e)}), 400
+    except Exception as e:
+        return jsonify({"status": "error", "message": f"Affinity calculation failed: {str(e)}"}), 500
+
+
+@app.route("/api/predict/reference-summary")
+def api_predict_reference_summary():
+    """Summary of historical reference blocks used by the Spatial Affinity Engine."""
+    summary = {
+        "engine": "GeoMine Spatial Affinity Engine (Pathway A)",
+        "methodology": "Exponential Distance Decay over Verified Historical Exploration Points",
+        "default_bandwidth_km": 50.0,
+        "minerals": {
+            "Iron Ore": {
+                "status": "active",
+                "evidence_level": "High",
+                "site_count": 6,
+                "location_count": 505,
+                "sites": [
+                    "Alenga-Nendwadi Iron Ore Block",
+                    "Gilanguda-Padur Iron Ore Block",
+                    "Marampalli-Jinjgaon Iron Ore Block",
+                    "Murwada-Tumarikodi Iron Ore Block",
+                    "Tadgaon-Wateli Iron Ore Block",
+                    "Tadgaon-Wateli G4 Iron Ore Block"
+                ],
+                "geographic_focus": "Gadchiroli Iron Ore Belt, Maharashtra"
+            },
+            "Limestone": {
+                "status": "active",
+                "evidence_level": "Moderate",
+                "site_count": 4,
+                "location_count": 47,
+                "sites": [
+                    "Mutyalampadu-Tangeda Limestone Block",
+                    "Raghunathapalem Cluster-3 Limestone Block",
+                    "Ramapuram Limestone Block",
+                    "Tangeda Limestone Block"
+                ],
+                "geographic_focus": "Palnad / Kurnool Sub-basin, Andhra Pradesh & Telangana"
+            },
+            "Bauxite": {
+                "status": "active",
+                "evidence_level": "Moderate-Low (Clustered)",
+                "site_count": 3,
+                "location_count": 196,
+                "sites": [
+                    "Dumarguda Bauxite Block",
+                    "Parpatia Bauxite Block",
+                    "Tarhapani (West) Bauxite Block"
+                ],
+                "geographic_focus": "Lateritic Plateaus, Surguja (Chhattisgarh) & Koraput (Odisha)"
+            },
+            "Manganese": {
+                "status": "insufficient_data",
+                "evidence_level": "Insufficient for Generalization",
+                "site_count": 1,
+                "location_count": 26,
+                "sites": [
+                    "Pimperkunta Manganese Block"
+                ],
+                "geographic_focus": "Adilabad, Telangana",
+                "reason": "Single-site archive lacks geographic diversity; model strictly refrains from scoring."
+            }
+        }
+    }
+    return jsonify(summary)
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5000)

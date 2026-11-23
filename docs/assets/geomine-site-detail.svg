@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="100%" height="700" fill="none">
+  <!-- Background -->
+  <rect width="1200" height="700" fill="#171513"/>
+
+  <!-- Dimmed Background Grid Layer (behind drawer) -->
+  <g opacity="0.25">
+    <rect x="0" y="0" width="1200" height="700" fill="#211D19"/>
+    <text x="300" y="100" font-family="'Syne', sans-serif" font-size="32" fill="#F5EEE7">Explore Geological Sites</text>
+  </g>
+  <!-- Backdrop Blur Simulation Layer -->
+  <rect width="660" height="700" fill="#000000" fill-opacity="0.6"/>
+
+  <!-- Slide-In Drawer (Right 540px) -->
+  <g transform="translate(660, 0)">
+    <!-- Drawer Background -->
+    <rect width="540" height="700" fill="#211D19" stroke="#E98245" stroke-width="1.5"/>
+
+    <!-- Drawer Header -->
+    <g transform="translate(32, 28)">
+      <text x="0" y="14" font-family="'DM Mono', monospace" font-size="9" fill="#E98245">GEOLOGICAL SITE INTELLIGENCE</text>
+      <text x="440" y="14" font-family="'DM Sans', sans-serif" font-size="14" fill="#B9AAA0" cursor="pointer">✕</text>
+
+      <g transform="translate(0, 30)">
+        <rect x="0" y="0" width="135" height="24" rx="12" fill="#E98245" fill-opacity="0.15" stroke="#E98245"/>
+        <text x="14" y="16" font-family="'DM Sans', sans-serif" font-size="11" font-weight="600" fill="#FF9557">🪨 BAUXITE</text>
+      </g>
+
+      <text x="0" y="85" font-family="'Syne', sans-serif" font-size="24" font-weight="800" fill="#F5EEE7">Parpatia Bauxite Block</text>
+      <text x="0" y="105" font-family="'DM Mono', monospace" font-size="11" fill="#87786E">SITE ID: PARPATIA · 3,552 VERIFIED RECORDS</text>
+    </g>
+
+    <!-- Tab Strip -->
+    <g transform="translate(32, 155)">
+      <line x1="0" y1="36" x2="476" y2="36" stroke="#493A30"/>
+
+      <!-- Tab 1: Overview -->
+      <text x="0" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="500" fill="#B9AAA0">Overview</text>
+
+      <!-- Tab 2: Location -->
+      <text x="80" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="500" fill="#B9AAA0">Location</text>
+
+      <!-- Tab 3: Assays (Active) -->
+      <text x="156" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#E98245">Assays</text>
+      <rect x="150" y="34" width="48" height="2" fill="#E98245"/>
+
+      <!-- Tab 4: Geology Context -->
+      <text x="224" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="500" fill="#B9AAA0">Geology Context</text>
+
+      <!-- Tab 5: Sources -->
+      <text x="340" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="500" fill="#B9AAA0">Sources</text>
+    </g>
+
+    <!-- Drawer Body: Assay Table & Statistics -->
+    <g transform="translate(32, 215)">
+      <!-- Metric Cards Row -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="110" height="55" rx="8" fill="#29231F" stroke="#493A30"/>
+        <text x="12" y="26" font-family="'Syne', sans-serif" font-size="18" font-weight="700" fill="#E98245">3,552</text>
+        <text x="12" y="42" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">TOTAL ROWS</text>
+
+        <rect x="122" y="0" width="110" height="55" rx="8" fill="#29231F" stroke="#493A30"/>
+        <text x="134" y="26" font-family="'Syne', sans-serif" font-size="18" font-weight="700" fill="#E8D6C1">17</text>
+        <text x="134" y="42" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">ANALYTES</text>
+
+        <rect x="244" y="0" width="110" height="55" rx="8" fill="#29231F" stroke="#493A30"/>
+        <text x="256" y="26" font-family="'Syne', sans-serif" font-size="18" font-weight="700" fill="#78B89A">1</text>
+        <text x="256" y="42" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">SOURCE DOC</text>
+
+        <rect x="366" y="0" width="110" height="55" rx="8" fill="#29231F" stroke="#493A30"/>
+        <text x="378" y="26" font-family="'Syne', sans-serif" font-size="18" font-weight="700" fill="#FF9557">2</text>
+        <text x="378" y="42" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">MINERAL TYPES</text>
+      </g>
+
+      <!-- Table Header -->
+      <text x="0" y="80" font-family="'DM Mono', monospace" font-size="10" fill="#E8D6C1" font-weight="600">ANALYTICAL ASSAY SUMMARY TABLE</text>
+
+      <g transform="translate(0, 95)">
+        <rect width="476" height="280" rx="8" fill="#29231F" stroke="#493A30"/>
+
+        <!-- Header Row -->
+        <rect width="476" height="34" rx="8" fill="#332922"/>
+        <text x="14" y="22" font-family="'DM Mono', monospace" font-size="9.5" fill="#B9AAA0">ANALYTE</text>
+        <text x="90" y="22" font-family="'DM Mono', monospace" font-size="9.5" fill="#B9AAA0">UNIT</text>
+        <text x="150" y="22" font-family="'DM Mono', monospace" font-size="9.5" fill="#B9AAA0">COUNT</text>
+        <text x="225" y="22" font-family="'DM Mono', monospace" font-size="9.5" fill="#B9AAA0">MEAN</text>
+        <text x="295" y="22" font-family="'DM Mono', monospace" font-size="9.5" fill="#B9AAA0">MEDIAN</text>
+        <text x="380" y="22" font-family="'DM Mono', monospace" font-size="9.5" fill="#B9AAA0">MIN – MAX</text>
+
+        <!-- Row 1: Al2O3 -->
+        <g transform="translate(0, 34)">
+          <line x1="0" y1="36" x2="476" y2="36" stroke="#382C24"/>
+          <text x="14" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#FF9557">Al2O3</text>
+          <text x="90" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#87786E">%</text>
+          <text x="150" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#F5EEE7">1,114</text>
+          <text x="225" y="24" font-family="'DM Mono', monospace" font-size="12" font-weight="700" fill="#E8D6C1">33.24</text>
+          <text x="295" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#B9AAA0">32.90</text>
+          <text x="380" y="24" font-family="'DM Mono', monospace" font-size="10.5" fill="#87786E">13.68 – 57.66</text>
+        </g>
+
+        <!-- Row 2: SiO2 -->
+        <g transform="translate(0, 70)">
+          <line x1="0" y1="36" x2="476" y2="36" stroke="#382C24"/>
+          <text x="14" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#FF9557">SiO2</text>
+          <text x="90" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#87786E">%</text>
+          <text x="150" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#F5EEE7">1,114</text>
+          <text x="225" y="24" font-family="'DM Mono', monospace" font-size="12" font-weight="700" fill="#E8D6C1">4.61</text>
+          <text x="295" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#B9AAA0">4.10</text>
+          <text x="380" y="24" font-family="'DM Mono', monospace" font-size="10.5" fill="#87786E">0.38 – 24.53</text>
+        </g>
+
+        <!-- Row 3: Fe2O3 -->
+        <g transform="translate(0, 106)">
+          <line x1="0" y1="36" x2="476" y2="36" stroke="#382C24"/>
+          <text x="14" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#FF9557">Fe2O3</text>
+          <text x="90" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#87786E">%</text>
+          <text x="150" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#F5EEE7">1,114</text>
+          <text x="225" y="24" font-family="'DM Mono', monospace" font-size="12" font-weight="700" fill="#E8D6C1">40.82</text>
+          <text x="295" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#B9AAA0">41.10</text>
+          <text x="380" y="24" font-family="'DM Mono', monospace" font-size="10.5" fill="#87786E">3.82 – 65.20</text>
+        </g>
+
+        <!-- Row 4: TiO2 -->
+        <g transform="translate(0, 142)">
+          <line x1="0" y1="36" x2="476" y2="36" stroke="#382C24"/>
+          <text x="14" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#FF9557">TiO2</text>
+          <text x="90" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#87786E">%</text>
+          <text x="150" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#F5EEE7">87</text>
+          <text x="225" y="24" font-family="'DM Mono', monospace" font-size="12" font-weight="700" fill="#E8D6C1">6.23</text>
+          <text x="295" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#B9AAA0">6.10</text>
+          <text x="380" y="24" font-family="'DM Mono', monospace" font-size="10.5" fill="#87786E">1.20 – 12.80</text>
+        </g>
+
+        <!-- Row 5: THA -->
+        <g transform="translate(0, 178)">
+          <line x1="0" y1="36" x2="476" y2="36" stroke="#382C24"/>
+          <text x="14" y="24" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#FF9557">THA</text>
+          <text x="90" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#87786E">%</text>
+          <text x="150" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#F5EEE7">92</text>
+          <text x="225" y="24" font-family="'DM Mono', monospace" font-size="12" font-weight="700" fill="#E8D6C1">41.85</text>
+          <text x="295" y="24" font-family="'DM Mono', monospace" font-size="11" fill="#B9AAA0">42.20</text>
+          <text x="380" y="24" font-family="'DM Mono', monospace" font-size="10.5" fill="#87786E">28.50 – 52.40</text>
+        </g>
+      </g>
+
+      <!-- Bottom Disclaimer / Audit Note -->
+      <g transform="translate(0, 395)">
+        <rect width="476" height="48" rx="8" fill="#171513" stroke="#493A30"/>
+        <text x="14" y="20" font-family="'DM Mono', monospace" font-size="8.5" fill="#E5B56C">⚠ DATA AUDIT NOTE</text>
+        <text x="14" y="36" font-family="'DM Sans', sans-serif" font-size="11" fill="#B9AAA0">
+          Source: GSI Primary Chemical-Analysis Table · Transcribed from borehole assays
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

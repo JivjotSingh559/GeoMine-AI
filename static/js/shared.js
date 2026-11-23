@@ -123,5 +123,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ── Exports for page scripts ── */
 window.GeoMine = {
-  $, $$, esc, getJSON, postJSON, toast, fmt, getMineralPalette,
+  $, $$, esc, getJSON, postJSON, toast, fmt, getMineralPalette, initReveal,
 };

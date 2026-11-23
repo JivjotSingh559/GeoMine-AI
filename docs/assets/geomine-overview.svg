@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="100%" height="700" fill="none">
+  <!-- Background -->
+  <rect width="1200" height="700" fill="#171513"/>
+  
+  <!-- Left Navigation Bar Simulation (240px) -->
+  <rect x="0" y="0" width="240" height="700" fill="#211D19" stroke="#493A30" stroke-width="1"/>
+  
+  <!-- Nav Logo -->
+  <g transform="translate(24, 28)">
+    <polygon points="16,2 30,10 30,26 16,34 2,26 2,10" stroke="#E98245" stroke-width="1.5" fill="#332922"/>
+    <circle cx="16" cy="18" r="3" fill="#E98245"/>
+    <text x="38" y="22" font-family="'Syne', sans-serif" font-size="16" font-weight="800" fill="#F5EEE7">GeoMine<tspan fill="#E98245">AI</tspan></text>
+    <text x="38" y="34" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">INTELLIGENCE</text>
+  </g>
+
+  <!-- Nav Links -->
+  <g transform="translate(16, 90)">
+    <!-- Dashboard Link (Active) -->
+    <rect x="0" y="0" width="208" height="40" rx="8" fill="#E98245" fill-opacity="0.12" stroke="#E98245" stroke-width="1"/>
+    <circle cx="20" cy="20" r="5" fill="#E98245"/>
+    <text x="36" y="24" font-family="'DM Sans', sans-serif" font-size="13" font-weight="600" fill="#E98245">Dashboard</text>
+    <circle cx="192" cy="20" r="3" fill="#E98245"/>
+
+    <!-- Explore Sites Link -->
+    <text x="36" y="66" font-family="'DM Sans', sans-serif" font-size="13" font-weight="500" fill="#B9AAA0">Explore Sites</text>
+    <!-- Analytics Link -->
+    <text x="36" y="106" font-family="'DM Sans', sans-serif" font-size="13" font-weight="500" fill="#B9AAA0">Analytics</text>
+    <!-- Reports Link -->
+    <text x="36" y="146" font-family="'DM Sans', sans-serif" font-size="13" font-weight="500" fill="#B9AAA0">Reports</text>
+  </g>
+
+  <!-- Main Hero Area Simulation -->
+  <g transform="translate(280, 40)">
+    <!-- Top Badge -->
+    <rect x="0" y="0" width="220" height="24" rx="12" fill="#29231F" stroke="#493A30"/>
+    <circle cx="12" cy="12" r="3.5" fill="#E98245"/>
+    <text x="24" y="15.5" font-family="'DM Mono', monospace" font-size="9" fill="#FF9557">GEOSCIENCE INTELLIGENCE PORTAL</text>
+
+    <!-- Headline -->
+    <text x="0" y="60" font-family="'Syne', sans-serif" font-size="34" font-weight="800" fill="#F5EEE7">
+      Deciphering the <tspan fill="#E98245">Subsurface</tspan>
+    </text>
+    <text x="0" y="98" font-family="'Syne', sans-serif" font-size="34" font-weight="800" fill="#F5EEE7">
+      with Precision Intelligence.
+    </text>
+
+    <!-- Description -->
+    <text x="0" y="132" font-family="'DM Sans', sans-serif" font-size="13.5" fill="#B9AAA0" width="500">
+      GeoMineAI unifies 32,562 verified exploration records across 18 major geological blocks
+    </text>
+    <text x="0" y="152" font-family="'DM Sans', sans-serif" font-size="13.5" fill="#B9AAA0">
+      into a high-performance analytics workbench for Indian mineral resources.
+    </text>
+
+    <!-- CTA Buttons -->
+    <rect x="0" y="180" width="130" height="38" rx="8" fill="#E98245"/>
+    <text x="28" y="204" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#171513">Explore Sites →</text>
+
+    <rect x="142" y="180" width="165" height="38" rx="8" fill="#29231F" stroke="#493A30"/>
+    <text x="162" y="204" font-family="'DM Sans', sans-serif" font-size="12" font-weight="600" fill="#F5EEE7">How It Works</text>
+
+    <!-- 3 Core Feature Cards in Hero -->
+    <g transform="translate(0, 245)">
+      <!-- Card 1 -->
+      <rect x="0" y="0" width="260" height="150" rx="12" fill="#29231F" stroke="#493A30"/>
+      <circle cx="28" cy="28" r="14" fill="#332922"/>
+      <text x="22" y="33" font-size="14">🗺️</text>
+      <text x="54" y="32" font-family="'Syne', sans-serif" font-size="14" font-weight="700" fill="#F5EEE7">Explore Sites</text>
+      <text x="20" y="65" font-family="'DM Sans', sans-serif" font-size="11.5" fill="#B9AAA0">
+        18 field exploration blocks across
+      </text>
+      <text x="20" y="82" font-family="'DM Sans', sans-serif" font-size="11.5" fill="#B9AAA0">
+        7 states with Leaflet map synchronization.
+      </text>
+      <text x="20" y="125" font-family="'DM Mono', monospace" font-size="10.5" fill="#E98245">Launch Explorer →</text>
+
+      <!-- Card 2 -->
+      <rect x="280" y="0" width="260" height="150" rx="12" fill="#29231F" stroke="#493A30"/>
+      <circle cx="308" cy="28" r="14" fill="#332922"/>
+      <text x="302" y="33" font-size="14">📊</text>
+      <text x="334" y="32" font-family="'Syne', sans-serif" font-size="14" font-weight="700" fill="#F5EEE7">Comparative Analytics</text>
+      <text x="300" y="65" font-family="'DM Sans', sans-serif" font-size="11.5" fill="#B9AAA0">
+        Cross-sectional histograms, oxide
+      </text>
+      <text x="300" y="82" font-family="'DM Sans', sans-serif" font-size="11.5" fill="#B9AAA0">
+        grade comparisons and variance models.
+      </text>
+      <text x="300" y="125" font-family="'DM Mono', monospace" font-size="10.5" fill="#78B89A">Open Analytics →</text>
+
+      <!-- Card 3 -->
+      <rect x="560" y="0" width="260" height="150" rx="12" fill="#29231F" stroke="#493A30"/>
+      <circle cx="588" cy="28" r="14" fill="#332922"/>
+      <text x="582" y="33" font-size="14">📑</text>
+      <text x="614" y="32" font-family="'Syne', sans-serif" font-size="14" font-weight="700" fill="#F5EEE7">Custom Reports</text>
+      <text x="580" y="65" font-family="'DM Sans', sans-serif" font-size="11.5" fill="#B9AAA0">
+        Live-preview dossiers with CSV
+      </text>
+      <text x="580" y="82" font-family="'DM Sans', sans-serif" font-size="11.5" fill="#B9AAA0">
+        export and PDF print-ready styling.
+      </text>
+      <text x="580" y="125" font-family="'DM Mono', monospace" font-size="10.5" fill="#E8D6C1">Generate Dossier →</text>
+    </g>
+
+    <!-- Bottom Interactive Strata Graphic -->
+    <g transform="translate(0, 420)">
+      <rect x="0" y="0" width="820" height="195" rx="12" fill="#211D19" stroke="#493A30"/>
+      <text x="24" y="32" font-family="'Syne', sans-serif" font-size="14" font-weight="700" fill="#F5EEE7">SUBSURFACE WEATHERING PROFILE EXPLORER</text>
+      <text x="640" y="32" font-family="'DM Mono', monospace" font-size="10" fill="#78B89A">✓ REAL-TIME INTERACTION</text>
+
+      <rect x="24" y="48" width="772" height="30" rx="6" fill="#382C24" stroke="#F97316"/>
+      <text x="38" y="68" font-family="'DM Mono', monospace" font-size="11" fill="#F5EEE7">01. LATERITIC DURICRUST &amp; IRONSTONE CAPPING (0.0 – 3.5m)</text>
+
+      <rect x="24" y="84" width="772" height="30" rx="6" fill="#3D2E24" stroke="#E98245"/>
+      <text x="38" y="104" font-family="'DM Mono', monospace" font-size="11" fill="#FF9557">02. BAUXITIC CORE &amp; ALUMINOUS ENRICHMENT HORIZON (3.5 – 12.0m)</text>
+
+      <rect x="24" y="120" width="772" height="30" rx="6" fill="#2B221D" stroke="#B96D43"/>
+      <text x="38" y="140" font-family="'DM Mono', monospace" font-size="11" fill="#B9AAA0">03. LITHOMARGIC SAPROLITIC CLAY TRANSITION (12.0 – 22.0m)</text>
+
+      <rect x="24" y="156" width="772" height="26" rx="6" fill="#211B17" stroke="#493A30"/>
+      <text x="38" y="173" font-family="'DM Mono', monospace" font-size="10.5" fill="#87786E">04. PRECAMBRIAN BASEMENT HOST ROCK (&gt;22.0m)</text>
+    </g>
+  </g>
+</svg>

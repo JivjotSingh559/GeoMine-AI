@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="100%" height="700" fill="none">
+  <!-- Background -->
+  <rect width="1200" height="700" fill="#171513"/>
+
+  <!-- Left Navigation Bar Simulation (240px) -->
+  <rect x="0" y="0" width="240" height="700" fill="#211D19" stroke="#493A30" stroke-width="1"/>
+  
+  <g transform="translate(24, 28)">
+    <polygon points="16,2 30,10 30,26 16,34 2,26 2,10" stroke="#E98245" stroke-width="1.5" fill="#332922"/>
+    <circle cx="16" cy="18" r="3" fill="#E98245"/>
+    <text x="38" y="22" font-family="'Syne', sans-serif" font-size="16" font-weight="800" fill="#F5EEE7">GeoMine<tspan fill="#E98245">AI</tspan></text>
+    <text x="38" y="34" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">INTELLIGENCE</text>
+  </g>
+
+  <!-- Nav Links with Explore Sites Active -->
+  <g transform="translate(16, 90)">
+    <text x="36" y="24" font-family="'DM Sans', sans-serif" font-size="13" font-weight="500" fill="#B9AAA0">Dashboard</text>
+    
+    <!-- Explore Sites Active -->
+    <rect x="0" y="42" width="208" height="40" rx="8" fill="#E98245" fill-opacity="0.12" stroke="#E98245" stroke-width="1"/>
+    <circle cx="20" cy="62" r="5" fill="#E98245"/>
+    <text x="36" y="66" font-family="'DM Sans', sans-serif" font-size="13" font-weight="600" fill="#E98245">Explore Sites</text>
+    <circle cx="192" cy="62" r="3" fill="#E98245"/>
+
+    <text x="36" y="106" font-family="'DM Sans', sans-serif" font-size="13" font-weight="500" fill="#B9AAA0">Analytics</text>
+    <text x="36" y="146" font-family="'DM Sans', sans-serif" font-size="13" font-weight="500" fill="#B9AAA0">Reports</text>
+  </g>
+
+  <!-- Explore Header Area -->
+  <g transform="translate(270, 30)">
+    <text x="0" y="20" font-family="'DM Mono', monospace" font-size="9" fill="#E98245">HOME / EXPLORE SITES</text>
+    <text x="0" y="52" font-family="'Syne', sans-serif" font-size="28" font-weight="800" fill="#F5EEE7">
+      Explore Geological Sites
+    </text>
+
+    <!-- Mineral Filter Chips -->
+    <g transform="translate(0, 72)">
+      <!-- All Chip -->
+      <rect x="0" y="0" width="100" height="32" rx="16" fill="#29231F" stroke="#493A30"/>
+      <text x="14" y="20" font-family="'DM Sans', sans-serif" font-size="11" fill="#B9AAA0">🌐 All (18)</text>
+
+      <!-- Bauxite Chip (Selected) -->
+      <rect x="110" y="0" width="125" height="32" rx="16" fill="#E98245" fill-opacity="0.15" stroke="#E98245" stroke-width="1.5"/>
+      <text x="124" y="20" font-family="'DM Sans', sans-serif" font-size="11" font-weight="600" fill="#FF9557">🪨 Bauxite (3)</text>
+
+      <!-- Limestone Chip -->
+      <rect x="245" y="0" width="130" height="32" rx="16" fill="#29231F" stroke="#493A30"/>
+      <text x="258" y="20" font-family="'DM Sans', sans-serif" font-size="11" fill="#B9AAA0">🪵 Limestone (4)</text>
+
+      <!-- Iron Ore Chip -->
+      <rect x="385" y="0" width="125" height="32" rx="16" fill="#29231F" stroke="#493A30"/>
+      <text x="398" y="20" font-family="'DM Sans', sans-serif" font-size="11" fill="#B9AAA0">🔩 Iron Ore (6)</text>
+
+      <!-- Manganese Chip -->
+      <rect x="520" y="0" width="140" height="32" rx="16" fill="#29231F" stroke="#493A30"/>
+      <text x="532" y="20" font-family="'DM Sans', sans-serif" font-size="11" fill="#B9AAA0">🔮 Manganese (1)</text>
+
+      <!-- Base Metal Chip -->
+      <rect x="670" y="0" width="135" height="32" rx="16" fill="#29231F" stroke="#493A30"/>
+      <text x="682" y="20" font-family="'DM Sans', sans-serif" font-size="11" fill="#B9AAA0">⚙️ Base Metal (2)</text>
+    </g>
+
+    <!-- 3-Way Toggle & View Controls -->
+    <g transform="translate(0, 118)">
+      <rect x="0" y="0" width="230" height="34" rx="8" fill="#29231F" stroke="#493A30"/>
+      <rect x="2" y="2" width="74" height="30" rx="6" fill="#332922"/>
+      <text x="16" y="21" font-family="'DM Sans', sans-serif" font-size="11" font-weight="700" fill="#E98245">Grid</text>
+      <text x="96" y="21" font-family="'DM Sans', sans-serif" font-size="11" font-weight="500" fill="#B9AAA0">Map</text>
+      <text x="168" y="21" font-family="'DM Sans', sans-serif" font-size="11" font-weight="500" fill="#B9AAA0">Split</text>
+
+      <text x="250" y="22" font-family="'DM Mono', monospace" font-size="11" fill="#B9AAA0">FILTER: Bauxite · 3 Sites Identified</text>
+    </g>
+
+    <!-- Cards Row -->
+    <g transform="translate(0, 168)">
+      <!-- Card 1: Parpatia Bauxite Block -->
+      <g transform="translate(0, 0)">
+        <rect x="0" y="0" width="285" height="440" rx="16" fill="#29231F" stroke="#E98245" stroke-width="1.5"/>
+        <!-- Card Top Visual -->
+        <rect x="0" y="0" width="285" height="150" rx="16" fill="#3D2E24"/>
+        <text x="115" y="90" font-size="44" opacity="0.4">🪨</text>
+        <rect x="14" y="14" width="75" height="22" rx="11" fill="#171513" stroke="#E98245"/>
+        <text x="24" y="29" font-family="'DM Mono', monospace" font-size="9.5" fill="#FF9557">BAUXITE</text>
+        <rect x="95" y="14" width="85" height="22" rx="11" fill="#171513" stroke="#78B89A"/>
+        <text x="104" y="29" font-family="'DM Mono', monospace" font-size="9.5" fill="#78B89A">✓ ASSAYS</text>
+        <text x="210" y="140" font-family="'DM Mono', monospace" font-size="9" fill="#87786E">PARPATIA</text>
+
+        <!-- Body -->
+        <text x="16" y="180" font-family="'Syne', sans-serif" font-size="16" font-weight="700" fill="#F5EEE7">Parpatia Bauxite Block</text>
+        <text x="16" y="202" font-family="'DM Sans', sans-serif" font-size="12" fill="#B9AAA0">📍 Surguja, Chhattisgarh</text>
+        <circle cx="20" cy="225" r="3.5" fill="#E98245"/>
+        <text x="30" y="228" font-family="'DM Sans', sans-serif" font-size="11.5" font-weight="600" fill="#E98245">Bauxite &amp; REE Core</text>
+
+        <!-- Stats Boxes -->
+        <rect x="16" y="245" width="120" height="48" rx="8" fill="#332922" stroke="#493A30"/>
+        <text x="28" y="268" font-family="'Syne', sans-serif" font-size="15" font-weight="700" fill="#E8D6C1">3,552</text>
+        <text x="28" y="283" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">RECORDS</text>
+
+        <rect x="148" y="245" width="120" height="48" rx="8" fill="#332922" stroke="#493A30"/>
+        <text x="160" y="268" font-family="'Syne', sans-serif" font-size="15" font-weight="700" fill="#78B89A">1,293</text>
+        <text x="160" y="283" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">Al2O3 ASSAYS</text>
+
+        <text x="16" y="325" font-family="'DM Mono', monospace" font-size="9.5" fill="#87786E">LAT 22.8430° N · LON 83.1785° E</text>
+
+        <!-- Footer Actions -->
+        <line x1="0" y1="355" x2="285" y2="355" stroke="#493A30"/>
+        <rect x="14" y="375" width="170" height="42" rx="8" fill="#E98245"/>
+        <text x="48" y="401" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#171513">Explore Site →</text>
+        <rect x="195" y="375" width="76" height="42" rx="8" fill="#211D19" stroke="#493A30"/>
+        <text x="215" y="401" font-family="'DM Sans', sans-serif" font-size="11.5" font-weight="600" fill="#B9AAA0">Map</text>
+      </g>
+
+      <!-- Card 2: Tarhapani (West) Bauxite Block -->
+      <g transform="translate(305, 0)">
+        <rect x="0" y="0" width="285" height="440" rx="16" fill="#29231F" stroke="#493A30"/>
+        <rect x="0" y="0" width="285" height="150" rx="16" fill="#382C24"/>
+        <text x="115" y="90" font-size="44" opacity="0.4">🪨</text>
+        <rect x="14" y="14" width="75" height="22" rx="11" fill="#171513" stroke="#E98245"/>
+        <text x="24" y="29" font-family="'DM Mono', monospace" font-size="9.5" fill="#FF9557">BAUXITE</text>
+        <rect x="95" y="14" width="85" height="22" rx="11" fill="#171513" stroke="#78B89A"/>
+        <text x="104" y="29" font-family="'DM Mono', monospace" font-size="9.5" fill="#78B89A">✓ ASSAYS</text>
+        <text x="190" y="140" font-family="'DM Mono', monospace" font-size="9" fill="#87786E">TARHAPANI-W</text>
+
+        <text x="16" y="180" font-family="'Syne', sans-serif" font-size="16" font-weight="700" fill="#F5EEE7">Tarhapani (West) Block</text>
+        <text x="16" y="202" font-family="'DM Sans', sans-serif" font-size="12" fill="#B9AAA0">📍 Koraput, Odisha</text>
+        <circle cx="20" cy="225" r="3.5" fill="#E98245"/>
+        <text x="30" y="228" font-family="'DM Sans', sans-serif" font-size="11.5" font-weight="600" fill="#E98245">Eastern Ghats Bauxite</text>
+
+        <rect x="16" y="245" width="120" height="48" rx="8" fill="#332922" stroke="#493A30"/>
+        <text x="28" y="268" font-family="'Syne', sans-serif" font-size="15" font-weight="700" fill="#E8D6C1">1,767</text>
+        <text x="28" y="283" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">RECORDS</text>
+
+        <rect x="148" y="245" width="120" height="48" rx="8" fill="#332922" stroke="#493A30"/>
+        <text x="160" y="268" font-family="'Syne', sans-serif" font-size="15" font-weight="700" fill="#78B89A">1,191</text>
+        <text x="160" y="283" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">Al2O3 ASSAYS</text>
+
+        <text x="16" y="325" font-family="'DM Mono', monospace" font-size="9.5" fill="#87786E">LAT 18.9146° N · LON 82.6311° E</text>
+
+        <line x1="0" y1="355" x2="285" y2="355" stroke="#493A30"/>
+        <rect x="14" y="375" width="170" height="42" rx="8" fill="#E98245"/>
+        <text x="48" y="401" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#171513">Explore Site →</text>
+        <rect x="195" y="375" width="76" height="42" rx="8" fill="#211D19" stroke="#493A30"/>
+        <text x="215" y="401" font-family="'DM Sans', sans-serif" font-size="11.5" font-weight="600" fill="#B9AAA0">Map</text>
+      </g>
+
+      <!-- Card 3: Dumarguda Bauxite Block -->
+      <g transform="translate(610, 0)">
+        <rect x="0" y="0" width="285" height="440" rx="16" fill="#29231F" stroke="#493A30"/>
+        <rect x="0" y="0" width="285" height="150" rx="16" fill="#382C24"/>
+        <text x="115" y="90" font-size="44" opacity="0.4">🪨</text>
+        <rect x="14" y="14" width="75" height="22" rx="11" fill="#171513" stroke="#E98245"/>
+        <text x="24" y="29" font-family="'DM Mono', monospace" font-size="9.5" fill="#FF9557">BAUXITE</text>
+        <rect x="95" y="14" width="85" height="22" rx="11" fill="#171513" stroke="#78B89A"/>
+        <text x="104" y="29" font-family="'DM Mono', monospace" font-size="9.5" fill="#78B89A">✓ ASSAYS</text>
+        <text x="200" y="140" font-family="'DM Mono', monospace" font-size="9" fill="#87786E">DUMARGUDA</text>
+
+        <text x="16" y="180" font-family="'Syne', sans-serif" font-size="16" font-weight="700" fill="#F5EEE7">Dumarguda Bauxite Block</text>
+        <text x="16" y="202" font-family="'DM Sans', sans-serif" font-size="12" fill="#B9AAA0">📍 Surguja, Chhattisgarh</text>
+        <circle cx="20" cy="225" r="3.5" fill="#E98245"/>
+        <text x="30" y="228" font-family="'DM Sans', sans-serif" font-size="11.5" font-weight="600" fill="#E98245">Bauxite Profile</text>
+
+        <rect x="16" y="245" width="120" height="48" rx="8" fill="#332922" stroke="#493A30"/>
+        <text x="28" y="268" font-family="'Syne', sans-serif" font-size="15" font-weight="700" fill="#E8D6C1">75</text>
+        <text x="28" y="283" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">RECORDS</text>
+
+        <rect x="148" y="245" width="120" height="48" rx="8" fill="#332922" stroke="#493A30"/>
+        <text x="160" y="268" font-family="'Syne', sans-serif" font-size="15" font-weight="700" fill="#78B89A">75</text>
+        <text x="160" y="283" font-family="'DM Mono', monospace" font-size="8.5" fill="#87786E">Al2O3 ASSAYS</text>
+
+        <text x="16" y="325" font-family="'DM Mono', monospace" font-size="9.5" fill="#87786E">LAT 22.8007° N · LON 83.2224° E</text>
+
+        <line x1="0" y1="355" x2="285" y2="355" stroke="#493A30"/>
+        <rect x="14" y="375" width="170" height="42" rx="8" fill="#E98245"/>
+        <text x="48" y="401" font-family="'DM Sans', sans-serif" font-size="12" font-weight="700" fill="#171513">Explore Site →</text>
+        <rect x="195" y="375" width="76" height="42" rx="8" fill="#211D19" stroke="#493A30"/>
+        <text x="215" y="401" font-family="'DM Sans', sans-serif" font-size="11.5" font-weight="600" fill="#B9AAA0">Map</text>
+      </g>
+    </g>
+  </g>
+</svg>

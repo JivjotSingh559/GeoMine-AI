@@ -448,6 +448,13 @@
   width: 100%;
 }
 
+/* Dark theme tile filter — desaturates & darkens OSM tiles to match the copper palette */
+#exploreMap .leaflet-tile-pane,
+#splitMap .leaflet-tile-pane,
+#drawerMiniMap .leaflet-tile-pane {
+  filter: brightness(0.55) saturate(0.4) hue-rotate(190deg);
+}
+
 .explore-map-overlay {
   position: absolute;
   bottom: 14px;
@@ -670,6 +677,91 @@
   border-radius: var(--radius);
   border: 1px solid var(--border);
   overflow: hidden;
+}
+
+/* ── Spatial Affinity Probe Tool (Pathway A) ── */
+#spatialAffinityCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-accent, #B96D43);
+  padding: 14px;
+  margin-top: var(--space-4);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: border-color var(--transition-fast);
+}
+
+#spatialAffinityCard:hover {
+  border-color: var(--accent);
+}
+
+.probe-pin-container {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.probe-pin-center {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-bright, #FF9557);
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  position: absolute;
+  top: 7px;
+  left: 7px;
+  box-shadow: 0 0 10px var(--accent-glow, rgba(233, 130, 69, 0.8));
+  z-index: 2;
+}
+
+.probe-pin-pulse {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(233, 130, 69, 0.35);
+  border: 1.5px solid var(--accent, #E98245);
+  animation: probePulse 1.8s infinite ease-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@keyframes probePulse {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.affinity-result-box {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-top: var(--space-3);
+  animation: fadeIn 0.25s ease-out;
+}
+
+.affinity-score-val {
+  font: 800 28px var(--font-mono);
+  color: var(--accent);
+  line-height: 1;
+}
+
+.affinity-breakdown-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  font-size: 11px;
+}
+
+.affinity-breakdown-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(73, 58, 48, 0.4);
+  color: var(--text-secondary);
+}
+
+.affinity-breakdown-list li:last-child {
+  border-bottom: none;
 }
 
 /* Responsive */
