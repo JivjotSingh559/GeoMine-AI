@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics — Comparative Exploration Intelligence{% endblock %}
+
+{% block head_extra %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/analytics.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- ═══ PAGE HEADER ═══ -->
+<header class="page-head">
+  <div class="eyebrow">HOME / ANALYTICS</div>
+  <div class="page-head-row">
+    <div>
+      <h1>Comparative Analytics Workspace</h1>
+      <p>
+        Evaluate cross-sectional geochemical relationships, compare analyte concentrations across exploration blocks, and inspect verified grade distributions.
+      </p>
+    </div>
+    <div>
+      <span class="badge badge-accent" style="font-size: 12px; padding: 6px 14px;">
+        DATA-DRIVEN RECONNAISSANCE
+      </span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ FILTER & CONTROL BAR ═══ -->
+<div class="analytics-control-bar">
+  <!-- Mineral Selector -->
+  <div class="control-group">
+    <label class="input-label" for="analyticMineralSelect">Focus Mineral Category</label>
+    <select id="analyticMineralSelect" class="select">
+      <option value="Bauxite">Bauxite</option>
+      <option value="Limestone">Limestone</option>
+      <option value="Iron ore">Iron ore</option>
+      <option value="Base metal">Base metal</option>
+    </select>
+  </div>
+
+  <!-- Analyte Selector -->
+  <div class="control-group">
+    <label class="input-label" for="analyticAnalyteSelect">Comparative Target Analyte</label>
+    <select id="analyticAnalyteSelect" class="select">
+      <option value="Al2O3">Loading analytes…</option>
+    </select>
+  </div>
+</div>
+
+<!-- ═══ STATS METRIC ROW ═══ -->
+<div class="analytics-stats-row">
+  <div class="analytics-stat-card">
+    <span class="analytics-stat-label">Assay Records Evaluated</span>
+    <span class="analytics-stat-val" id="statTotalRecords">—</span>
+    <span class="analytics-stat-sub">In selected analyte cohort</span>
+  </div>
+
+  <div class="analytics-stat-card">
+    <span class="analytics-stat-label">Arithmetic Mean Grade</span>
+    <span class="analytics-stat-val" id="statMeanValue" style="color: var(--accent);">—</span>
+    <span class="analytics-stat-sub">Across active site records</span>
+  </div>
+
+  <div class="analytics-stat-card">
+    <span class="analytics-stat-label">Median Concentration</span>
+    <span class="analytics-stat-val" id="statMedianValue" style="color: var(--success);">—</span>
+    <span class="analytics-stat-sub">50th percentile distribution</span>
+  </div>
+
+  <div class="analytics-stat-card">
+    <span class="analytics-stat-label">Standard Deviation</span>
+    <span class="analytics-stat-val" id="statStdDev" style="color: var(--warning);">—</span>
+    <span class="analytics-stat-sub">Measure of grade dispersion</span>
+  </div>
+</div>
+
+<!-- ═══ MAIN CHARTS GRID ═══ -->
+<div class="analytics-grid">
+  <!-- Chart 1: Site Grade Comparison -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <h3 class="chart-title">Analyte Concentration Across Exploration Sites</h3>
+        <p class="chart-desc" id="siteCompSub">Mean grade comparison across geological blocks</p>
+      </div>
+      <span class="badge badge-accent">CROSS-SITE</span>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="chartSiteComparison"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 2: Frequency Distribution / Histogram -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <h3 class="chart-title">Analyte Grade Frequency Distribution</h3>
+        <p class="chart-desc">Histogram of assay values divided into discrete grade intervals</p>
+      </div>
+      <span class="badge badge-muted">HISTOGRAM</span>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="chartAnalyteDistribution"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 3: Mineral Overview -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <h3 class="chart-title">Mineral Portfolio Record Distribution</h3>
+        <p class="chart-desc">Total verified assay records categorized by mineral domain</p>
+      </div>
+      <span class="badge badge-muted">DATASET RECORD VOLUME</span>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="chartMineralOverview"></canvas>
+    </div>
+  </div>
+
+  <!-- Chart 4: State Exploration Density -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <div>
+        <h3 class="chart-title">State-Level Exploration Density</h3>
+        <p class="chart-desc">Volume of cataloged exploration data by administrative jurisdiction</p>
+      </div>
+      <span class="badge badge-success">GEOGRAPHIC SUMMARY</span>
+    </div>
+    <div class="chart-canvas-wrap">
+      <canvas id="chartStateSummary"></canvas>
+    </div>
+  </div>
+
+  <!-- Full Width Insights Card -->
+  <div class="chart-card full-width">
+    <div class="insights-card">
+      <div>
+        <div class="eyebrow" style="color: var(--accent);">AUTOMATED SCIENTIFIC SYNTHESIS</div>
+        <h3 style="font-size: 18px; margin-top: 4px;">Empirical Geochemical Observations</h3>
+      </div>
+
+      <div class="insights-list" id="analyticsInsightsList">
+        <div class="insight-item">
+          <span class="insight-bullet">▸</span>
+          <div>Analyzing active mineral cohort and geochemical statistics…</div>
+        </div>
+      </div>
+
+      <div class="insight-caveat-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;">
+          <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <div>
+          <strong>Methodological Disclaimer:</strong> These statistics represent cross-sectional empirical analyses of transcribed laboratory records. Statistical correlation between analytes does not establish geological causation. Small sample subsets (e.g. sites with &lt; 30 samples) should be interpreted with appropriate caution.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COMPARISON TABLE ═══ -->
+<div class="table-card">
+  <div class="chart-header">
+    <div>
+      <h3 class="chart-title">Detailed Exploration Block Comparison Matrix</h3>
+      <p class="chart-desc">Side-by-side summary of assay statistics with units, counts, and ranges</p>
+    </div>
+    <span class="badge badge-accent">PRIMARY DATA</span>
+  </div>
+
+  <div class="comp-table-wrap">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Exploration Block Name</th>
+          <th>Analyte</th>
+          <th>Unit</th>
+          <th>Record Count</th>
+          <th>Mean Grade</th>
+          <th>Median Grade</th>
+          <th>Min – Max Range</th>
+          <th>Std. Dev (±)</th>
+        </tr>
+      </thead>
+      <tbody id="compTableBody">
+        <tr>
+          <td colspan="8" style="text-align: center; color: var(--text-muted); padding: 24px;">
+            Loading comparative records matrix…
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
+
+{% block page_js %}
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+{% endblock %}

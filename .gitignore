@@ -159,9 +159,12 @@ ENV/
 env.bak/
 venv.bak/
 
+<<<<<<< HEAD
+=======
 # Conda environments
 conda-meta/
 
+>>>>>>> origin/main
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -221,3 +224,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+<<<<<<< HEAD
+
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env
+=======
+>>>>>>> origin/main
